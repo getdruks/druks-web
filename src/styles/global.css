@@ -311,25 +311,6 @@ main section {
   text-decoration: none;
 }
 
-.brand-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  color: var(--text);
-  font: 700 28px / 1 var(--font-sans);
-  white-space: nowrap;
-}
-
-.brand-lockup-mark {
-  display: block;
-  flex: none;
-  width: 48px;
-  height: 48px;
-  background: var(--brand);
-  mask: url('/brand-mark.svg') center / contain no-repeat;
-  -webkit-mask: url('/brand-mark.svg') center / contain no-repeat;
-}
-
 .desktop-nav {
   display: flex;
   align-items: center;
