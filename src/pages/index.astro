@@ -55,9 +55,8 @@ const websiteJsonLd = {
     <link id="druks-favicon-svg" rel="icon" href="/foundation/v0.1.0/icons/favicon-light.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/foundation/v0.1.0/icons/apple-touch-icon-light.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0c0c" />
-    <meta name="theme-color" content="#f7f7f7" />
+    <meta name="theme-color" data-theme-color="light" media="(prefers-color-scheme: light)" content="#f7f7f7" />
+    <meta name="theme-color" data-theme-color="dark" media="(prefers-color-scheme: dark)" content="#0c0c0c" />
     <script is:inline>
       const themeStorageKey = 'druks:website-theme';
       try {
@@ -73,9 +72,17 @@ const websiteJsonLd = {
       const updateThemeColor = () => {
         const styles = getComputedStyle(document.documentElement);
         const background = styles.getPropertyValue('--druks-color-background').trim();
-        document.querySelector('meta[name="theme-color"]:not([media])')?.setAttribute('content', background);
         const dark = styles.getPropertyValue('color-scheme').trim() === 'dark';
         const variant = dark ? 'dark' : 'light';
+        const selectedTheme = document.documentElement.dataset.theme;
+        for (const themeColor of ['light', 'dark']) {
+          const meta = document.querySelector(`meta[name="theme-color"][data-theme-color="${themeColor}"]`);
+          if (!meta) continue;
+          meta.media = selectedTheme
+            ? themeColor === variant ? 'all' : 'not all'
+            : `(prefers-color-scheme: ${themeColor})`;
+          if (themeColor === variant) meta.content = background;
+        }
         document.querySelector('#druks-favicon-ico')?.setAttribute('href', `/foundation/v0.1.0/icons/favicon-${variant}.ico`);
         document.querySelector('#druks-favicon-svg')?.setAttribute('href', `/foundation/v0.1.0/icons/favicon-${variant}.svg`);
       };
@@ -110,7 +117,8 @@ const websiteJsonLd = {
         });
         systemTheme.addEventListener('change', () => {
           try {
-            if (!localStorage.getItem(themeStorageKey)) updateThemeColor();
+            const savedTheme = localStorage.getItem(themeStorageKey);
+            if (savedTheme !== 'light' && savedTheme !== 'dark') updateThemeColor();
           } catch {
             updateThemeColor();
           }
