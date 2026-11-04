@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFile } from 'node:fs/promises'
+import { readdir, readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
@@ -30,5 +30,47 @@ if (!tokens.includes("@import url('/foundation/v0.1.0/druks-base.css');")) {
 const packageLogo = await readFile(resolve(foundation, 'brand-lockup.svg'))
 const importedLogo = await readFile(resolve(root, 'src/assets/brand-lockup.svg'))
 if (!packageLogo.equals(importedLogo)) throw new Error('Inline logo source differs from the pinned Foundation package')
+
+async function collectSourceFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true })
+  const nested = await Promise.all(entries.map(async (entry) => {
+    const path = resolve(directory, entry.name)
+    if (entry.isDirectory()) return collectSourceFiles(path)
+    return entry.isFile() ? [path] : []
+  }))
+  return nested.flat()
+}
+
+const sourceFiles = await collectSourceFiles(resolve(root, 'src'))
+const literalColor = /#[\da-f]{3,8}\b|\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch)\s*\(/i
+const violations = []
+
+for (const path of sourceFiles) {
+  const extension = path.slice(path.lastIndexOf('.'))
+  const source = await readFile(path, 'utf8')
+  const styleBlocks = extension === '.css'
+    ? [source]
+    : extension === '.astro'
+      ? [...source.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)].map((match) => match[1])
+      : []
+
+  for (const block of styleBlocks) {
+    const css = block.replace(/\/\*[\s\S]*?\*\//g, '')
+    for (const rule of css.split('}')) {
+      const body = rule.slice(rule.lastIndexOf('{') + 1)
+      for (const declaration of body.split(';')) {
+        const match = declaration.match(/^\s*([\w-]+)\s*:\s*([\s\S]*)$/)
+        if (!match) continue
+        const [, property, value] = match
+        if (property.startsWith('--') || property === 'box-shadow') continue
+        if (literalColor.test(value)) violations.push(`${path.slice(root.length + 1)}: ${property}: ${value.trim()}`)
+      }
+    }
+  }
+}
+
+if (violations.length) {
+  throw new Error(`Use Foundation tokens instead of literal style colors:\n${violations.join('\n')}`)
+}
 
 console.log(`Foundation ${version} files match their SHA-256 checksums (${release.split('  ')[0]} release bundle).`)

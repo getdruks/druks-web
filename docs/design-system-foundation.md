@@ -4,6 +4,13 @@ The website consumes the vendored, versioned Foundation package at
 `public/foundation/v0.1.0/`. `src/styles/tokens.css` imports its generated CSS
 directly. Existing website token names are semantic aliases to Foundation
 roles; website-only chart colors, scrim, and dialog shadow remain local.
+Component and illustration colors use the Foundation tokens, including
+theme-aware `color-mix()` treatments. `npm run foundation:check` also rejects
+literal colors in authored CSS and Astro style blocks, while allowing local
+custom-property definitions and website-specific shadow values. The hero
+canvas uses black RGB channels with `destination-out` as an alpha cutout mask;
+those channels erase pixels and do not paint a black overlay or replace the
+Foundation scrim token.
 
 The existing theme control selects System, Light, or Dark. System removes
 `data-theme`, allowing Foundation CSS to follow `prefers-color-scheme`. The

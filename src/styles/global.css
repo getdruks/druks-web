@@ -77,7 +77,7 @@ main,
 }
 
 ::selection {
-  background: rgb(77 212 244 / 28%);
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
   color: var(--text);
 }
 
@@ -1074,7 +1074,7 @@ main section {
 .app-code-window {
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgb(77 212 244 / 24%);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
   border-radius: var(--radius-panel);
   background: var(--demo-canvas);
   box-shadow: 0 28px 78px rgb(0 0 0 / 24%);
@@ -1093,7 +1093,7 @@ main section {
 
 .code-window-bar {
   padding: 14px 18px;
-  background: rgb(77 212 244 / 4%);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 .app-code-window pre {
@@ -1198,7 +1198,7 @@ main section {
 
 .copy-button.copied {
   border-color: var(--cyan);
-  background: rgb(77 212 244 / 10%);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--cyan);
 }
 
@@ -1208,7 +1208,6 @@ main section {
 
 .site-footer {
   padding-block: 44px 50px;
-  background: rgb(6 10 17 / 88%);
 }
 
 .footer-grid {
@@ -1395,7 +1394,7 @@ main section {
 
   .graph-canvas::before {
     z-index: -2;
-    background: #2a3545;
+    background: var(--border);
   }
 
   .graph-canvas::after {
