@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readdir, readFile } from 'node:fs/promises'
+import { access, readdir, readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
@@ -31,6 +31,20 @@ const packageLogo = await readFile(resolve(foundation, 'brand-lockup.svg'))
 const importedLogo = await readFile(resolve(root, 'src/assets/brand-lockup.svg'))
 if (!packageLogo.equals(importedLogo)) throw new Error('Inline logo source differs from the pinned Foundation package')
 
+const baseCss = await readFile(resolve(foundation, 'druks-base.css'), 'utf8')
+const foundationTokens = new Set([...baseCss.matchAll(/(--druks-[\w-]+)\s*:/g)].map((match) => match[1]))
+const legacyTokens = [
+  'bg', 'bg-deep', 'surface', 'surface-soft', 'surface-2', 'surface-3', 'input',
+  'text', 'text-mid', 'text-muted', 'text-secondary', 'text-tertiary', 'border',
+  'border-soft', 'border-strong', 'accent', 'on-accent', 'selected', 'brand',
+  'info', 'success', 'warning', 'danger', 'info-surface', 'success-surface',
+  'warning-surface', 'danger-surface', 'scrim', 'chart-series-1', 'chart-series-2',
+  'chart-series-3', 'chart-series-4', 'shadow-dialog', 'cyan', 'cyan-bright', 'cyan-ink',
+  'demo-border', 'demo-raised-surface',
+]
+const legacyPattern = new RegExp(`var\\(\\s*--(?:${legacyTokens.join('|')})(?=[,\\s)])`)
+const legacyDefinitionPattern = new RegExp(`(?:^|[;{])\\s*--(?:${legacyTokens.join('|')})\\s*:`, 'm')
+
 async function collectSourceFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
   const nested = await Promise.all(entries.map(async (entry) => {
@@ -48,6 +62,28 @@ const violations = []
 for (const path of sourceFiles) {
   const extension = path.slice(path.lastIndexOf('.'))
   const source = await readFile(path, 'utf8')
+  if (legacyPattern.test(source) || legacyDefinitionPattern.test(source)) {
+    throw new Error(`Legacy consumer color alias remains in ${path.slice(root.length + 1)}`)
+  }
+  for (const [, token] of source.matchAll(/var\(\s*(--druks-[\w-]+)/g)) {
+    if (!foundationTokens.has(token)) {
+      throw new Error(`Unknown Foundation token ${token} in ${path.slice(root.length + 1)}`)
+    }
+  }
+
+  for (const [, pathReference] of source.matchAll(/\/foundation\/v0\.1\.0\/([^'"`\s)]+)/g)) {
+    const candidates = pathReference.includes('${variant}')
+      ? ['light', 'dark'].map((variant) => pathReference.replace('${variant}', variant))
+      : [pathReference]
+    for (const candidate of candidates) {
+      try {
+        await access(resolve(root, 'public/foundation/v0.1.0', candidate))
+      } catch {
+        throw new Error(`Missing Foundation asset referenced by ${path.slice(root.length + 1)}: ${candidate}`)
+      }
+    }
+  }
+
   const styleBlocks = extension === '.css'
     ? [source]
     : extension === '.astro'
@@ -69,8 +105,18 @@ for (const path of sourceFiles) {
   }
 }
 
+const manifest = JSON.parse(await readFile(resolve(root, 'public/site.webmanifest'), 'utf8'))
+for (const icon of manifest.icons ?? []) {
+  if (!icon.src.startsWith('/foundation/v0.1.0/')) continue
+  try {
+    await access(resolve(root, 'public', icon.src.slice(1)))
+  } catch {
+    throw new Error(`Missing Foundation asset referenced by site.webmanifest: ${icon.src}`)
+  }
+}
+
 if (violations.length) {
   throw new Error(`Use Foundation tokens instead of literal style colors:\n${violations.join('\n')}`)
 }
 
-console.log(`Foundation ${version} files match their SHA-256 checksums (${release.split('  ')[0]} release bundle).`)
+console.log(`Foundation ${version} files match their SHA-256 checksums; local bundle candidate: ${release.split('  ')[0]}.`)

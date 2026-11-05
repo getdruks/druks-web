@@ -4,9 +4,7 @@ The Favicon is a first-class Druks base-system asset contract. It uses the appro
 
 ## Source and generated files
 
-`src/assets/favicon-dragon.svg` is the canonical vector geometry. `src/assets/favicon-dragon.png` is the supplied transparent raster companion used as input for deterministic raster output. `scripts/build_icons.py` reads the approved Light/Dark `background` and `brand-mark` token values and generates:
-
-The two source files are treated as one reviewed artwork pair. The test suite pins their SHA-256 digests so replacing either source requires an explicit review and checksum update; aspect-ratio checks alone are not treated as proof that arbitrary files depict the same mark.
+`src/assets/favicon-dragon.svg` is the canonical vector geometry. `src/assets/favicon-dragon.png` is the supplied transparent raster companion used as input for raster output. `scripts/build_icons.py` reads the approved Light/Dark `background` and `brand-mark` token values and generates:
 
 | Output | Use |
 | --- | --- |
@@ -15,18 +13,20 @@ The two source files are treated as one reviewed artwork pair. The test suite pi
 | `dist/icons/apple-touch-icon-light.png`, `apple-touch-icon-dark.png` | 180px iOS/iPadOS Home Screen source assets. Consumers select the appropriate file in their page metadata. |
 | `dist/icons/pwa-any-{light,dark}-{192,512}.png` | Full-color install/launcher icons for manifest `purpose: "any"`. |
 | `dist/icons/pwa-maskable-{light,dark}-{192,512}.png` | Opaque install/launcher icons for manifest `purpose: "maskable"`. Their dragon artwork is scaled to 64% of the canvas width and stays inside the 40% radius safe zone. |
-| `dist/druks-favicon-assets.sha256` | SHA-256 checksums for the generated asset set. |
+| `dist/druks-favicon-assets.sha256` | Local build checksum list; ignored by Git and superseded in releases by the bundle's `SHA256SUMS.txt`. |
 
 Run `python3 scripts/build.py` to regenerate CSS, icons, and checksums. Do not edit generated files by hand.
 
+Raster PNG and ICO encoders can produce different bytes across operating systems. Do not commit generated PNG/ICO files or the local checksum list. CI checks the committed CSS, generated SVGs, and preview markup byte-for-byte. A release rebuilds all raster assets on its runner and `SHA256SUMS.txt` records the exact bytes packaged in that release, so each version has one authoritative asset set and checksum list.
+
 ## Theme and use contract
 
-- Light uses the approved Light brand mark `#00677b` on the approved Light background `#f7f7f7`; Dark uses cyan `#4dd4f4` on `#0c0c0c`. The exact values are read from the typed token source, not repeated as independent design decisions.
-- Both foreground/background pairs pass the 3:1 meaningful-mark release gate: Light is 6.08:1 and Dark is 11.21:1.
+- Each theme uses its `brand-mark` and `background` values from the typed token source.
+- Each foreground/background pair must pass the 3:1 meaningful-mark release gate.
 - The regular browser icon fills 86% of its square width. Maskable artwork scales to 64% of the canvas width; the generated silhouette is checked pixel-by-pixel to stay inside the Web App Manifest safe-zone circle with radius 40% of the canvas.
 - In System mode, consumers can declare Light and Dark favicon links with matching `media="(prefers-color-scheme: ...)"`. When a consumer has an explicit Light/Dark preference, it updates the active browser-icon URL to match that effective preference. This behavior belongs to each consumer; the base package contains assets, not runtime JavaScript.
-- Cloud's consumer plan now requires System, Light, and Dark modes using the base theme contract, with System as default. Cloud will select the matching browser Favicon for the effective theme; installed PWA icons remain the static assets declared by its manifest.
-- Apple touch and installed PWA icons are assets chosen when a consumer writes its HTML/manifest. The Web App Manifest `icons` entries do not select by `prefers-color-scheme`, so an installed launcher icon is not promised to change live with the page theme. Consumers select the appropriate static Light or Dark asset when generating their manifest. Manifest names, `theme_color`, `background_color`, installability, and icon URLs remain consumer-owned.
+- Consumers that support System, Light, and Dark select the matching browser Favicon for the effective theme; installed PWA icons remain the static assets declared by their manifests.
+- Apple touch and installed PWA icons are assets chosen when a consumer writes its HTML/manifest. The Web App Manifest `icons` entries do not select by `prefers-color-scheme`, so an installed launcher icon is not promised to change live with the page theme. Consumers select an appropriate static asset when generating their manifest. Manifest names, `theme_color`, `background_color`, installability, and icon URLs remain consumer-owned.
 - Do not use a transparent canvas for these variants. The opaque theme background makes the contrast pair explicit and prevents browser/OS surfaces from becoming an unknown background.
 - The source SVG is artwork; generated SVGs bake in the selected colors because an externally loaded favicon cannot inherit page CSS custom properties.
 

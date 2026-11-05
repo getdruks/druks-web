@@ -2,15 +2,16 @@
 
 The website consumes the vendored, versioned Foundation package at
 `public/foundation/v0.1.0/`. `src/styles/tokens.css` imports its generated CSS
-directly. Existing website token names are semantic aliases to Foundation
-roles; website-only chart colors, scrim, and dialog shadow remain local.
-Component and illustration colors use the Foundation tokens, including
-theme-aware `color-mix()` treatments. `npm run foundation:check` also rejects
-literal colors in authored CSS and Astro style blocks, while allowing local
-custom-property definitions and website-specific shadow values. The hero
-canvas uses black RGB channels with `destination-out` as an alpha cutout mask;
-those channels erase pixels and do not paint a black overlay or replace the
-Foundation scrim token.
+directly. Website styles use Foundation's public `--druks-` names without
+legacy color aliases. Chart-series, scrim, and dialog-shadow values also come
+from the Foundation package. Site-specific layout and diagram-state variables
+remain local; composed demo surfaces derive from Foundation tokens.
+`npm run foundation:check` verifies bundle checksums and logo source, rejects
+unknown Foundation tokens, legacy color aliases, and literal colors in authored
+CSS and Astro style blocks, and checks that referenced Foundation assets exist.
+The hero canvas uses black RGB channels with `destination-out` as an alpha
+cutout mask; those channels erase pixels and do not paint a black overlay or
+replace the Foundation scrim token.
 
 The existing theme control selects System, Light, or Dark. System removes
 `data-theme`, allowing Foundation CSS to follow `prefers-color-scheme`. The
@@ -19,10 +20,8 @@ active theme. Browser favicons follow the effective theme; the install manifest
 references Light PWA icons because manifest icons are static metadata.
 
 Run `npm run foundation:check` to verify the vendored files against the package
-checksums. The current expected bundle checksum is recorded in
-`public/foundation/v0.1.0/RELEASE.sha256` and is from the local Foundation
-candidate. Before this PR is merge-ready, compare it with the published
-`v0.1.0` release from the merged Foundation repository. If the published bundle
-checksum differs, replace the vendored package and rerun the check. This PR
-must not merge before the Foundation release is available and the checksum
-matches.
+checksums. `public/foundation/v0.1.0/RELEASE.sha256` records the local candidate
+rebuilt from merged Foundation `main` at `5fbc034`; it is not the official
+release checksum. Compare it with the published `v0.1.0` release before merge.
+Replace the package and rerun the check if the official bundle differs. This PR
+must not merge until the release is available and its checksum matches.

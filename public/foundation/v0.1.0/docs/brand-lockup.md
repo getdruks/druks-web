@@ -1,6 +1,6 @@
 # Brand lockup
 
-Shared visual contract for the full Druks Logo Lockup. One canonical SVG contains the outlined wordmark and dragon geometry. Its fills refer to separate semantic CSS tokens, so Light, Dark, and consumer-approved theme overrides use the same SVG. Consumers do not render the wordmark with a font. The stylesheet sets one shared height, and the SVG retains its intrinsic aspect ratio.
+Shared visual contract for the full Druks Logo Lockup. One canonical SVG contains the outlined wordmark and dragon geometry. Its fills refer to separate semantic CSS tokens, so Light, Dark, and consumer theme overrides use the same SVG. Consumers do not render the wordmark with a font. The stylesheet sets one shared height, and the SVG retains its intrinsic aspect ratio.
 
 ## Markup
 
@@ -33,8 +33,7 @@ For non-link use, keep the logo decorative when nearby text supplies the identit
 - `--druks-color-brand-mark`
 - `--druks-color-text-primary`
 
-The 40px default traces to Yuri's explicit request to make the current 48px lockup smaller. The supplied `Druks Logo Dark.svg` and `Druks Logo Light Color.svg` have identical path geometry; this one canonical asset preserves those paths and binds the dragon and wordmark fills to semantic theme tokens when embedded inline. The SVG contains no theme-specific color values.
 
 ## Consumer boundary
 
-Consumers inline the same SVG asset and use the shared size token. They retain their own link destination, accessible name, and layout. Current local app, website, and Cloud branches do not import or pin the base bundle; their previews are not Foundation adoption. Consumer integration follows a versioned release and a separately reviewed migration. Cloud code changes also require its plan to be updated in the same change. No React renderer or application behavior belongs in this repository.
+Consumers inline the same SVG asset and use the shared size token. They retain their own link destination, accessible name, and layout. Consumer integration uses a versioned release and a separately reviewed migration. This repository provides no React renderer or application behavior.

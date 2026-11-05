@@ -2,9 +2,13 @@
 
 This guide describes how an app, website, or Cloud portal consumes a reviewed Druks Base Foundation release. It does not prescribe a framework or copy implementation code into this repository.
 
+## Use the public token names
+
+The Foundation publishes one public name per semantic token, using the `--druks-` prefix and lowercase kebab-case names (for example, `--druks-color-text-primary`). Consumers must use those names directly; the Foundation does not publish compatibility aliases for legacy variables. When the Druks shell migrates, its change must also account for installed apps that currently use legacy names such as `--text` and `--surface-2`, so those apps do not break and no permanent alias layer is needed.
+
 ## Pin a release
 
-Consumers must use a versioned GitHub Release bundle and record its SHA-256 checksum. The target is an immutable release; availability for this private repository must be confirmed by its owner. If immutability is unavailable, document that the release is mutable and follow the repository's protected-tag and provenance-verification fallback. The release bundle is named `druks-foundation-vX.Y.Z.zip`, with a matching `.sha256` sidecar. It contains the typed, described token source, generated plain CSS, inline Druks Logo Lockup SVG, generated Favicon assets, contracts, license, and an internal `SHA256SUMS.txt`. Use the exact release URL for the tag, for example `https://github.com/getdruks/druks-design/releases/download/vX.Y.Z/druks-foundation-vX.Y.Z.zip`. Do not consume a moving branch, `main`, or an unpinned working copy. See [Repository owner setup](repository-owner-setup.md) for the admin checklist.
+Consumers must use a versioned GitHub Release bundle and record its SHA-256 checksum. The target is an immutable release; availability for this private repository must be confirmed by its owner. If immutability is unavailable, document that the release is mutable and follow the repository's protected-tag and provenance-verification fallback. The release bundle is named `druks-foundation-vX.Y.Z.zip`, with a matching `.sha256` sidecar. It contains the typed, described token source, generated plain CSS, inline Druks Logo Lockup SVG, generated Favicon assets, contracts, license, and an internal `SHA256SUMS.txt`. Use the exact release URL for the tag, for example `https://github.com/getdruks/druks-design/releases/download/vX.Y.Z/druks-foundation-vX.Y.Z.zip`. Do not consume a moving branch, `main`, or an unpinned working copy.
 
 Verify the downloaded bundle against its `.sha256` sidecar, then verify the extracted files against its `SHA256SUMS.txt`. Keep the vendored CSS/assets and release version/checksum in the consumer repository. Each consumer's CI should verify the checked-in files against those recorded checksums and detect unreviewed drift. Update them only in a scoped, reviewed consumer change. If the base repository is private, the consumer's CI needs read-only access to it; do not use a token with write permission.
 
@@ -17,6 +21,14 @@ Load the base CSS once. The base stylesheet supplies semantic `--druks-` tokens 
 - An absent `data-theme` follows `prefers-color-scheme` for System.
 
 The consumer owns its preference control, persistence, and setting or removing `data-theme`. Do not copy the base palette or implement a second theme resolver in the consumer.
+
+## Use the chart, scrim, and shadow tokens
+
+Use the four chart-series colors only for labeled categorical series, with a non-color alternative where the chart needs one. The Foundation gates verify each series against the approved surface; consumers retain chart-specific distinctions and data accessibility.
+
+`--druks-color-scrim` is the translucent layer behind dialogs. The Foundation does not claim a standalone scrim contrast ratio.
+
+The approved `--druks-shadow-dialog` is a semantic elevation token. Consumers may use it where their reviewed dialog contract calls for the shared dialog shadow.
 
 ## Render the Druks Logo Lockup
 

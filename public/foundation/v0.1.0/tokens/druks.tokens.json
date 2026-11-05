@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Approved Druks Foundation tokens: semantic Light and Dark colors plus the Druks Logo Lockup size.",
+  "$description": "Approved Druks Foundation tokens: semantic Light and Dark colors, approved chart and scrim colors, dialog shadow, and Druks Logo Lockup size.",
   "color": {
     "$type": "color",
     "light": {
@@ -325,6 +325,76 @@
           "hex": "#fcefed"
         },
         "$description": "Danger status surface."
+      },
+      "chart-series-1": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784313725490196,
+            0.3843137254901961,
+            0.4627450980392157
+          ],
+          "alpha": 1,
+          "hex": "#146276"
+        },
+        "$description": "Approved categorical chart series 1. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-2": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4156862745098039,
+            0.3058823529411765,
+            0.6078431372549019
+          ],
+          "alpha": 1,
+          "hex": "#6a4e9b"
+        },
+        "$description": "Approved categorical chart series 2. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-3": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333333333333333,
+            0.4117647058823529,
+            0.3882352941176471
+          ],
+          "alpha": 1,
+          "hex": "#226963"
+        },
+        "$description": "Approved categorical chart series 3. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-4": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5686274509803921,
+            0.3254901960784314,
+            0.1254901960784314
+          ],
+          "alpha": 1,
+          "hex": "#915320"
+        },
+        "$description": "Approved categorical chart series 4. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "scrim": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0901960784313725,
+            0.2392156862745098,
+            0.2823529411764706
+          ],
+          "alpha": 0.2784313725490196,
+          "hex": "#173d48"
+        },
+        "$description": "Approved translucent dialog scrim color."
       }
     },
     "dark": {
@@ -649,6 +719,149 @@
           "hex": "#251313"
         },
         "$description": "Danger status surface."
+      },
+      "chart-series-1": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3019607843137255,
+            0.8313725490196079,
+            0.9568627450980393
+          ],
+          "alpha": 1,
+          "hex": "#4dd4f4"
+        },
+        "$description": "Approved categorical chart series 1. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-2": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6549019607843137,
+            0.5450980392156862,
+            0.9803921568627451
+          ],
+          "alpha": 1,
+          "hex": "#a78bfa"
+        },
+        "$description": "Approved categorical chart series 2. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-3": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3686274509803922,
+            0.9176470588235294,
+            0.8313725490196079
+          ],
+          "alpha": 1,
+          "hex": "#5eead4"
+        },
+        "$description": "Approved categorical chart series 3. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "chart-series-4": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9607843137254902,
+            0.6588235294117647,
+            0.3607843137254902
+          ],
+          "alpha": 1,
+          "hex": "#f5a85c"
+        },
+        "$description": "Approved categorical chart series 4. Category labels and non-color distinctions remain consumer-owned."
+      },
+      "scrim": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "alpha": 0.5019607843137255,
+          "hex": "#000000"
+        },
+        "$description": "Approved translucent dialog scrim color."
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "light": {
+      "dialog": {
+        "$type": "shadow",
+        "$value": {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1372549019607843,
+              0.3058823529411765,
+              0.3215686274509804
+            ],
+            "alpha": 0.1607843137254902,
+            "hex": "#234e52"
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 8,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 28,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "inset": false
+        },
+        "$description": "Approved Light dialog elevation shadow."
+      }
+    },
+    "dark": {
+      "dialog": {
+        "$type": "shadow",
+        "$value": {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "alpha": 0.5,
+            "hex": "#000000"
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 24,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 64,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "inset": false
+        },
+        "$description": "Approved Dark dialog elevation shadow."
       }
     }
   },

@@ -308,7 +308,7 @@
   .sandbox-intro > p {
     max-width: 58ch;
     margin: 24px 0 0;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-size: 17px;
     line-height: 1.65;
     text-wrap: pretty;
@@ -316,10 +316,10 @@
 
   .sandbox-console {
     margin-top: clamp(42px, 5vw, 66px);
-    border: 1px solid var(--demo-border);
-    border-top: 3px solid var(--cyan);
+    border: 1px solid var(--druks-color-border-default);
+    border-top: 3px solid var(--druks-color-accent);
     background: var(--demo-canvas);
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-family: var(--font-mono);
   }
 
@@ -336,7 +336,7 @@
   .sandbox-console-bar {
     min-height: 58px;
     padding: 11px 16px 11px 20px;
-    border-bottom: 1px solid var(--demo-border);
+    border-bottom: 1px solid var(--druks-color-border-default);
     background: var(--demo-header);
   }
 
@@ -347,18 +347,18 @@
   }
 
   .sandbox-console-brand strong {
-    color: var(--cyan);
+    color: var(--druks-color-accent);
     font-size: 11px;
     letter-spacing: 0.02em;
   }
 
   .sandbox-console-brand span {
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 8px;
   }
 
   .sandbox-console button:focus-visible {
-    outline: 1px solid var(--cyan);
+    outline: 1px solid var(--druks-color-accent);
     outline-offset: 3px;
   }
 
@@ -370,26 +370,26 @@
 
   .sandbox-list {
     padding: 18px 12px;
-    border-right: 1px solid var(--demo-border);
+    border-right: 1px solid var(--druks-color-border-default);
     background: var(--demo-subpanel);
   }
 
   .sandbox-list-heading {
     padding: 0 4px 13px;
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 8px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .sandbox-list-heading b {
-    color: var(--cyan);
+    color: var(--druks-color-accent);
     font-weight: 600;
   }
 
   .sandbox-instance {
     padding: 14px;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--druks-color-border-subtle);
     transition:
       max-height 240ms var(--ease-out),
       padding 240ms var(--ease-out),
@@ -405,7 +405,7 @@
     overflow: hidden;
     padding: 0 14px;
     border-width: 0;
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    background: color-mix(in srgb, var(--druks-color-accent) 5%, transparent);
     opacity: 0;
     transform: translateY(-8px);
   }
@@ -414,7 +414,7 @@
     max-height: 180px;
     padding: 14px;
     border-width: 1px;
-    border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+    border-color: color-mix(in srgb, var(--druks-color-accent) 54%, transparent);
     opacity: 1;
     transform: translateY(0);
   }
@@ -426,8 +426,8 @@
   .sandbox-status-dot {
     width: 6px;
     height: 6px;
-    background: var(--cyan);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 50%, transparent);
+    background: var(--druks-color-accent);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--druks-color-accent) 50%, transparent);
   }
 
   .sandbox-console[data-phase='working'] .sandbox-status-dot {
@@ -435,13 +435,13 @@
   }
 
   .sandbox-instance-heading strong {
-    color: var(--text);
+    color: var(--druks-color-text-primary);
     font-size: 10px;
   }
 
   .sandbox-instance-heading small {
     margin-left: auto;
-    color: var(--cyan);
+    color: var(--druks-color-accent);
     font-size: 7px;
     text-transform: uppercase;
   }
@@ -453,7 +453,7 @@
 
   .sandbox-instance > b {
     margin-top: 13px;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-size: 9px;
     font-weight: 560;
   }
@@ -461,7 +461,7 @@
   .sandbox-instance > span {
     margin-top: 5px;
     overflow: hidden;
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 7.5px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -472,14 +472,14 @@
     gap: 8px;
     margin-top: 14px;
     padding-top: 10px;
-    border-top: 1px solid var(--border-soft);
-    color: var(--text-muted);
+    border-top: 1px solid var(--druks-color-border-subtle);
+    color: var(--druks-color-text-tertiary);
     font-size: 7px;
   }
 
   .sandbox-list-empty {
     margin: 28px 4px 0;
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 8px;
     text-align: center;
   }
@@ -500,13 +500,13 @@
     display: grid;
     place-content: center;
     gap: 8px;
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     text-align: center;
     transition: opacity 180ms ease;
   }
 
   .sandbox-idle-message strong {
-    color: var(--text);
+    color: var(--druks-color-text-primary);
     font-size: 12px;
     font-weight: 560;
   }
@@ -523,7 +523,7 @@
   .sandbox-detail-heading {
     min-height: 70px;
     padding: 14px 22px;
-    border-bottom: 1px solid var(--demo-border);
+    border-bottom: 1px solid var(--druks-color-border-default);
   }
 
   .sandbox-detail-heading > div:first-child strong,
@@ -532,13 +532,13 @@
   }
 
   .sandbox-detail-heading > div:first-child strong {
-    color: var(--text);
+    color: var(--druks-color-text-primary);
     font-size: 11px;
   }
 
   .sandbox-detail-heading > div:first-child span {
     margin-top: 5px;
-    color: var(--cyan);
+    color: var(--druks-color-accent);
     font-size: 8px;
   }
 
@@ -552,14 +552,14 @@
     padding: 0 12px;
     border: 0;
     background: transparent;
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     cursor: pointer;
     font-family: var(--font-mono);
     font-size: 8px;
   }
 
   .sandbox-tabs button[aria-selected='true'] {
-    color: var(--text);
+    color: var(--druks-color-text-primary);
   }
 
   .sandbox-tabs button[aria-selected='true']::after {
@@ -568,7 +568,7 @@
     bottom: -15px;
     left: 10px;
     height: 2px;
-    background: var(--cyan);
+    background: var(--druks-color-accent);
     content: '';
   }
 
@@ -586,7 +586,7 @@
     display: grid;
     margin: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--druks-color-border-default);
   }
 
   .sandbox-context > div {
@@ -605,7 +605,7 @@
   }
 
   .sandbox-context dt {
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 7px;
     letter-spacing: 0.09em;
     text-transform: uppercase;
@@ -614,7 +614,7 @@
   .sandbox-context dd {
     margin-top: 6px;
     overflow: hidden;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-size: 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -643,7 +643,7 @@
     min-height: 42px;
     grid-template-columns: 56px minmax(0, 1fr) auto;
     gap: 14px;
-    border-bottom: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--druks-color-border-subtle);
     opacity: 0.18;
     transition:
       background 180ms ease,
@@ -656,19 +656,19 @@
   }
 
   .sandbox-events li.is-current {
-    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 76%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--druks-color-accent) 8%, transparent), transparent 76%);
   }
 
   .sandbox-events time,
   .sandbox-events b {
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 7.5px;
     font-weight: 450;
   }
 
   .sandbox-events span {
     overflow: hidden;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-size: 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -676,7 +676,7 @@
 
   .sandbox-events li.is-current span,
   .sandbox-events li.is-current b {
-    color: var(--cyan);
+    color: var(--druks-color-accent);
   }
 
   .sandbox-table-heading,
@@ -687,8 +687,8 @@
 
   .sandbox-table-heading {
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-muted);
+    border-bottom: 1px solid var(--druks-color-border-default);
+    color: var(--druks-color-text-tertiary);
     font-size: 7px;
     letter-spacing: 0.09em;
     text-transform: uppercase;
@@ -696,7 +696,7 @@
 
   .sandbox-table li {
     min-height: 50px;
-    border-bottom: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--druks-color-border-subtle);
     opacity: 0.18;
     transition: opacity 180ms ease;
   }
@@ -707,27 +707,27 @@
 
   .sandbox-table li span {
     overflow: hidden;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-size: 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .sandbox-table li b {
-    color: var(--text-muted);
+    color: var(--druks-color-text-tertiary);
     font-size: 8px;
     font-weight: 450;
   }
 
   .sandbox-table li strong {
-    color: var(--success);
+    color: var(--druks-color-status-success);
     font-size: 8px;
     font-weight: 560;
     text-transform: uppercase;
   }
 
   .sandbox-table li.is-blocked strong {
-    color: var(--danger);
+    color: var(--druks-color-status-danger);
   }
 
   .sandbox-table-summary {
@@ -738,11 +738,11 @@
   }
 
   .sandbox-table-summary strong {
-    color: var(--success);
+    color: var(--druks-color-status-success);
   }
 
   .sandbox-table-summary span {
-    color: var(--danger);
+    color: var(--druks-color-status-danger);
   }
 
   @keyframes sandbox-status-pulse {
@@ -758,7 +758,7 @@
 
     .sandbox-list {
       border-right: 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--druks-color-border-default);
     }
   }
 
