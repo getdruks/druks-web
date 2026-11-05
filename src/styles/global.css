@@ -1,4 +1,4 @@
-@import './tokens.css';
+@import '../foundation/druks-base.css';
 
 :root {
   --demo-canvas: color-mix(in srgb, var(--druks-color-surface) 94%, transparent);

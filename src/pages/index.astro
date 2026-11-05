@@ -51,12 +51,15 @@ const websiteJsonLd = {
     <link rel="canonical" href="https://druks.ai/" />
     <title>{siteTitle}</title>
     <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
-    <link id="druks-favicon-ico" rel="icon" href="/foundation/v0.1.0/icons/favicon-light.ico" sizes="32x32" />
-    <link id="druks-favicon-svg" rel="icon" href="/foundation/v0.1.0/icons/favicon-light.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/foundation/v0.1.0/icons/apple-touch-icon-light.png" />
+    <link rel="icon" href="/foundation/icons/favicon-light.ico" sizes="32x32" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/foundation/icons/favicon-dark.ico" sizes="32x32" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/foundation/icons/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/foundation/icons/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/foundation/icons/apple-touch-icon-light.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" data-theme-color="light" media="(prefers-color-scheme: light)" content="#f7f7f7" />
-    <meta name="theme-color" data-theme-color="dark" media="(prefers-color-scheme: dark)" content="#0c0c0c" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0c0c" />
+    <meta name="theme-color" content="#f7f7f7" />
     <script is:inline>
       const themeStorageKey = 'druks:website-theme';
       try {
@@ -70,21 +73,8 @@ const websiteJsonLd = {
         document.documentElement.removeAttribute('data-theme');
       }
       const updateThemeColor = () => {
-        const styles = getComputedStyle(document.documentElement);
-        const background = styles.getPropertyValue('--druks-color-background').trim();
-        const dark = styles.getPropertyValue('color-scheme').trim() === 'dark';
-        const variant = dark ? 'dark' : 'light';
-        const selectedTheme = document.documentElement.dataset.theme;
-        for (const themeColor of ['light', 'dark']) {
-          const meta = document.querySelector(`meta[name="theme-color"][data-theme-color="${themeColor}"]`);
-          if (!meta) continue;
-          meta.media = selectedTheme
-            ? themeColor === variant ? 'all' : 'not all'
-            : `(prefers-color-scheme: ${themeColor})`;
-          if (themeColor === variant) meta.content = background;
-        }
-        document.querySelector('#druks-favicon-ico')?.setAttribute('href', `/foundation/v0.1.0/icons/favicon-${variant}.ico`);
-        document.querySelector('#druks-favicon-svg')?.setAttribute('href', `/foundation/v0.1.0/icons/favicon-${variant}.svg`);
+        const background = getComputedStyle(document.documentElement).getPropertyValue('--druks-color-background').trim();
+        document.querySelector('meta[name="theme-color"]:not([media])')?.setAttribute('content', background);
       };
       window.addEventListener('DOMContentLoaded', () => {
         updateThemeColor();
@@ -117,8 +107,7 @@ const websiteJsonLd = {
         });
         systemTheme.addEventListener('change', () => {
           try {
-            const savedTheme = localStorage.getItem(themeStorageKey);
-            if (savedTheme !== 'light' && savedTheme !== 'dark') updateThemeColor();
+            if (!localStorage.getItem(themeStorageKey)) updateThemeColor();
           } catch {
             updateThemeColor();
           }

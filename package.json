@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run foundation:check && astro build",
-    "foundation:check": "node scripts/check-foundation.mjs",
+    "build": "node scripts/check-tokens.mjs && astro build",
     "postbuild": "find dist -name .DS_Store -delete",
     "preview": "astro preview",
     "deploy": "npm run build && rsync -az --delete dist/ druks-prod-control:/home/druks-app/site/ && ssh druks-prod-control chown -R druks-app:druks-app /home/druks-app/site"
