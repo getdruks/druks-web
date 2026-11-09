@@ -1,18 +1,9 @@
-@import './tokens.css';
+@import '../foundation/druks-base.css';
 
 :root {
-  --bg-deep: var(--bg);
-  --surface-soft: var(--surface);
-  --demo-raised-surface: var(--surface-2);
-  --demo-canvas: color-mix(in srgb, var(--surface) 94%, transparent);
-  --demo-header: color-mix(in srgb, var(--surface-2) 96%, transparent);
-  --demo-subpanel: color-mix(in srgb, var(--surface-2) 88%, transparent);
-  --demo-border: var(--border);
-  --text-mid: var(--text-secondary);
-  --text-muted: var(--text-tertiary);
-  --cyan: var(--accent);
-  --cyan-bright: var(--accent);
-  --cyan-ink: var(--on-accent);
+  --demo-canvas: color-mix(in srgb, var(--druks-color-surface) 94%, transparent);
+  --demo-header: color-mix(in srgb, var(--druks-color-surface-subtle) 96%, transparent);
+  --demo-subpanel: color-mix(in srgb, var(--druks-color-surface-subtle) 88%, transparent);
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, Menlo, monospace;
   --font-display: 'Newsreader Variable', Georgia, serif;
@@ -38,9 +29,9 @@ body {
   position: relative;
   margin: 0;
   overflow-x: hidden;
-  background-color: var(--bg-deep);
+  background-color: var(--druks-color-background);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .015 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   font-family: var(--font-sans);
   font-size: 16px;
   font-feature-settings: 'cv11', 'ss01', 'ss03';
@@ -77,8 +68,8 @@ main,
 }
 
 ::selection {
-  background: rgb(77 212 244 / 28%);
-  color: var(--text);
+  background: color-mix(in srgb, var(--druks-color-accent) 28%, transparent);
+  color: var(--druks-color-text-primary);
 }
 
 [hidden] {
@@ -105,7 +96,7 @@ a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--druks-color-accent);
   outline-offset: 4px;
 }
 
@@ -116,8 +107,8 @@ select:focus-visible {
   left: 12px;
   padding: 10px 14px;
   border-radius: var(--radius-control);
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 650;
@@ -148,7 +139,7 @@ select:focus-visible {
 }
 
 .glyph-pearl {
-  color: var(--cyan);
+  color: var(--druks-color-accent);
 }
 
 .wrap {
@@ -202,7 +193,7 @@ main section {
 .start-inner > p {
   max-width: 64ch;
   margin: 21px 0 0;
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   font-size: 17px;
   line-height: 1.65;
   text-wrap: pretty;
@@ -242,25 +233,25 @@ main section {
 }
 
 .button-primary {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--on-accent);
+  border-color: var(--druks-color-accent);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
 }
 
 .button-primary:hover {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--druks-color-accent);
+  background: var(--druks-color-accent);
 }
 
 .button-secondary {
-  border-color: var(--border);
-  background: var(--surface);
-  color: var(--text);
+  border-color: var(--druks-color-border-default);
+  background: var(--druks-color-surface);
+  color: var(--druks-color-text-primary);
 }
 
 .button-secondary:hover {
-  border-color: var(--text-muted);
-  background: var(--surface-2);
+  border-color: var(--druks-color-text-tertiary);
+  background: var(--druks-color-surface-subtle);
 }
 
 .cta-row {
@@ -275,7 +266,7 @@ main section {
   align-items: center;
   gap: 8px;
   margin-top: 24px;
-  color: var(--accent);
+  color: var(--druks-color-accent);
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 550;
@@ -283,7 +274,7 @@ main section {
 }
 
 .text-link:hover {
-  color: var(--text);
+  color: var(--druks-color-text-primary);
 }
 
 /* Header */
@@ -298,7 +289,7 @@ main section {
   height: var(--header-h);
   padding-inline: max(28px, calc((100vw - var(--maxw)) / 2 + 40px));
   border: 0;
-  background: color-mix(in srgb, var(--surface) 30%, transparent);
+  background: color-mix(in srgb, var(--druks-color-surface) 30%, transparent);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -307,27 +298,8 @@ main section {
 .footer-brand {
   display: inline-flex;
   align-items: center;
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   text-decoration: none;
-}
-
-.brand-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  color: var(--text);
-  font: 700 28px / 1 var(--font-sans);
-  white-space: nowrap;
-}
-
-.brand-lockup-mark {
-  display: block;
-  flex: none;
-  width: 48px;
-  height: 48px;
-  background: var(--brand);
-  mask: url('/brand-mark.svg') center / contain no-repeat;
-  -webkit-mask: url('/brand-mark.svg') center / contain no-repeat;
 }
 
 .desktop-nav {
@@ -339,14 +311,14 @@ main section {
 }
 
 .desktop-nav > a {
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   font-family: var(--font-mono);
   font-size: 11.5px;
   transition: color 160ms ease;
 }
 
 .desktop-nav > a:hover {
-  color: var(--text);
+  color: var(--druks-color-text-primary);
 }
 
 .desktop-nav .github-link {
@@ -357,16 +329,16 @@ main section {
 .desktop-nav .nav-cta,
 .mobile-nav .nav-cta {
   padding: 9px 12px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--druks-color-accent);
   border-radius: var(--radius-control);
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
   font-weight: 650;
 }
 
 .desktop-nav .nav-cta:hover {
-  color: var(--on-accent);
-  background: var(--accent);
+  color: var(--druks-color-on-accent);
+  background: var(--druks-color-accent);
 }
 
 .theme-control {
@@ -376,7 +348,7 @@ main section {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--text-secondary);
+  color: var(--druks-color-text-secondary);
   cursor: pointer;
 }
 
@@ -392,7 +364,7 @@ main section {
 }
 
 .theme-control:focus-within {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--druks-color-accent);
   outline-offset: 3px;
 }
 
@@ -434,8 +406,8 @@ main section {
 }
 
 .theme-control select option {
-  background: var(--surface);
-  color: var(--text);
+  background: var(--druks-color-surface);
+  color: var(--druks-color-text-primary);
 }
 
 .mobile-nav {
@@ -480,7 +452,7 @@ main section {
 .reduced-word {
   display: inline-block;
   padding-bottom: 0.08em;
-  color: var(--accent);
+  color: var(--druks-color-accent);
   font-style: italic;
   font-weight: 430;
   line-height: 1.12;
@@ -511,7 +483,7 @@ main section {
 .hero-sub {
   max-width: 62ch;
   margin: 25px 0 0;
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   font-size: 17.5px;
   line-height: 1.62;
   text-wrap: pretty;
@@ -522,8 +494,8 @@ main section {
 .ship-section {
   overflow: hidden;
   background:
-    radial-gradient(circle at 10% 44%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 28%),
-    var(--surface);
+    radial-gradient(circle at 10% 44%, color-mix(in srgb, var(--druks-color-accent) 4%, transparent), transparent 28%),
+    var(--druks-color-surface);
 }
 
 .ship-heading {
@@ -535,8 +507,8 @@ main section {
   position: relative;
   margin-top: 46px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--cyan);
+  border: 1px solid var(--druks-color-border-default);
+  border-top: 3px solid var(--druks-color-accent);
   border-radius: var(--radius-panel);
   background: var(--demo-canvas);
   box-shadow: 0 28px 80px rgb(0 0 0 / 27%);
@@ -553,7 +525,7 @@ main section {
   justify-content: space-between;
   min-height: 50px;
   padding: 12px 22px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 9px;
 }
 
@@ -577,11 +549,11 @@ main section {
 }
 
 .legend-runtime {
-  background: var(--cyan);
+  background: var(--druks-color-accent);
 }
 
 .legend-agent {
-  background: var(--chart-series-2);
+  background: var(--druks-color-chart-series-2);
 }
 
 .graph-legend .glyph {
@@ -598,7 +570,7 @@ main section {
 .graph-lane {
   position: absolute;
   z-index: 4;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: 0.1em;
@@ -614,7 +586,7 @@ main section {
 .graph-lane-agent {
   bottom: 22px;
   left: 22px;
-  color: var(--text-secondary);
+  color: var(--druks-color-text-secondary);
 }
 
 .graph-paths {
@@ -634,7 +606,7 @@ main section {
 }
 
 .graph-path-base {
-  stroke: var(--border-strong);
+  stroke: var(--druks-color-border-control);
   stroke-width: 2;
 }
 
@@ -647,9 +619,9 @@ main section {
 }
 
 .graph-current {
-  fill: var(--cyan-bright);
+  fill: var(--druks-color-accent);
   opacity: 0;
-  stroke: var(--surface);
+  stroke: var(--druks-color-surface);
   stroke-width: 3;
   transition: opacity 120ms ease;
   vector-effect: non-scaling-stroke;
@@ -669,7 +641,7 @@ main section {
 }
 
 .station {
-  --node-accent: var(--cyan);
+  --node-accent: var(--druks-color-accent);
   position: absolute;
   top: var(--node-y);
   left: var(--node-x);
@@ -689,8 +661,8 @@ main section {
   left: -5px;
   width: 10px;
   height: 10px;
-  border: 2px solid var(--surface);
-  background: var(--text-tertiary);
+  border: 2px solid var(--druks-color-surface);
+  background: var(--druks-color-text-tertiary);
   content: '';
   transform: translateY(-50%) rotate(45deg);
   transition:
@@ -704,14 +676,14 @@ main section {
   width: 100%;
   min-height: 124px;
   padding: 17px 18px 16px;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--druks-color-border-control);
   border-radius: 0;
   appearance: none;
   flex-direction: column;
   background:
     linear-gradient(90deg, var(--node-accent), transparent) 0 0 / 42px 2px no-repeat,
     linear-gradient(0deg, var(--node-accent), transparent) 100% 100% / 2px 26px no-repeat,
-    var(--surface);
+    var(--druks-color-surface);
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   color: inherit;
   cursor: pointer;
@@ -724,12 +696,12 @@ main section {
 }
 
 .station-trigger:hover {
-  border-color: color-mix(in srgb, var(--node-accent) 62%, var(--border-strong));
+  border-color: color-mix(in srgb, var(--node-accent) 62%, var(--druks-color-border-control));
   transform: translateY(-3px);
 }
 
 .station-trigger:focus-visible {
-  outline: 2px solid var(--cyan-bright);
+  outline: 2px solid var(--druks-color-accent);
   outline-offset: 4px;
 }
 
@@ -766,7 +738,7 @@ main section {
 }
 
 .node-agent {
-  --node-accent: var(--chart-series-2);
+  --node-accent: var(--druks-color-chart-series-2);
 }
 
 .node-owner,
@@ -781,14 +753,14 @@ main section {
   position: absolute;
   top: 16px;
   right: 17px;
-  color: var(--text-tertiary);
+  color: var(--druks-color-text-tertiary);
   font-size: 8px;
   letter-spacing: 0.08em;
 }
 
 .node-owner {
   margin-bottom: 13px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 8.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -796,7 +768,7 @@ main section {
 
 .station-name {
   display: block;
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   font-size: 15px;
   font-weight: 600;
 }
@@ -804,7 +776,7 @@ main section {
 .station-note {
   display: block;
   margin-top: 5px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 9.5px;
 }
 
@@ -814,12 +786,12 @@ main section {
   gap: 5px;
   margin-top: auto;
   padding-top: 13px;
-  color: color-mix(in srgb, var(--node-accent) 80%, var(--text-mid));
+  color: color-mix(in srgb, var(--node-accent) 80%, var(--druks-color-text-secondary));
   font-size: 8.5px;
 }
 
 .node-output-gate {
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
 }
 
 .node-output .glyph {
@@ -841,8 +813,8 @@ main section {
   top: -9px;
   right: 12px;
   padding: 3px 7px;
-  background: var(--cyan);
-  color: var(--cyan-ink);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
   content: 'next';
   font-family: var(--font-mono);
   font-size: 7px;
@@ -853,7 +825,7 @@ main section {
 }
 
 .station.next::before {
-  background: var(--cyan);
+  background: var(--druks-color-accent);
 }
 
 .station.done::before {
@@ -861,7 +833,7 @@ main section {
 }
 
 .station.done .station-trigger {
-  border-color: color-mix(in srgb, var(--node-accent) 38%, var(--border-strong));
+  border-color: color-mix(in srgb, var(--node-accent) 38%, var(--druks-color-border-control));
 }
 
 .station.active,
@@ -882,7 +854,7 @@ main section {
   background:
     linear-gradient(90deg, var(--node-accent), transparent) 0 0 / 64px 3px no-repeat,
     linear-gradient(0deg, var(--node-accent), transparent) 100% 100% / 3px 38px no-repeat,
-    color-mix(in srgb, var(--node-accent) 7%, var(--surface));
+    color-mix(in srgb, var(--node-accent) 7%, var(--druks-color-surface));
   box-shadow:
     0 16px 42px color-mix(in srgb, var(--node-accent) 12%, transparent),
     inset 0 0 30px color-mix(in srgb, var(--node-accent) 4%, transparent);
@@ -890,7 +862,7 @@ main section {
 
 .station.active .station-name,
 .station.merged .station-name {
-  color: var(--text);
+  color: var(--druks-color-text-primary);
 }
 
 .graph-gate {
@@ -900,7 +872,7 @@ main section {
   display: grid;
   gap: 7px;
   justify-items: center;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-family: var(--font-mono);
   font-size: 7px;
   letter-spacing: 0.1em;
@@ -918,8 +890,8 @@ main section {
   width: 19px;
   height: 19px;
   padding: 3px;
-  background: var(--surface);
-  color: var(--cyan);
+  background: var(--druks-color-surface);
+  color: var(--druks-color-accent);
 }
 
 .graph-gate-plan {
@@ -932,12 +904,12 @@ main section {
 }
 
 .graph-gate.is-reached {
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   opacity: 0.82;
 }
 
 .graph-gate.is-active {
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.14);
 }
@@ -952,20 +924,20 @@ main section {
   gap: 22px;
   min-height: 74px;
   padding: 18px 22px;
-  border-left: 3px solid var(--cyan);
-  background: var(--surface);
-  color: var(--text-mid);
+  border-left: 3px solid var(--druks-color-accent);
+  background: var(--druks-color-surface);
+  color: var(--druks-color-text-secondary);
   font-size: 11px;
 }
 
 .readout-sequence {
-  color: var(--text-tertiary);
+  color: var(--druks-color-text-tertiary);
   font-size: 9px;
   letter-spacing: 0.1em;
 }
 
 .readout-stage {
-  color: var(--cyan);
+  color: var(--druks-color-accent);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.09em;
@@ -973,12 +945,12 @@ main section {
 }
 
 .ship-graph[data-active-layer='agent'] .readout-stage {
-  color: var(--chart-series-2);
+  color: var(--druks-color-chart-series-2);
 }
 
 .readout-message {
   overflow: hidden;
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   font-size: 11px;
   font-weight: 470;
   text-overflow: ellipsis;
@@ -986,7 +958,7 @@ main section {
 }
 
 .readout-meta {
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 10px;
   white-space: nowrap;
 }
@@ -1080,7 +1052,7 @@ main section {
 
 .extend-section {
   overflow: hidden;
-  background: var(--surface);
+  background: var(--druks-color-surface);
 }
 
 .extend-layout {
@@ -1093,7 +1065,7 @@ main section {
 .app-code-window {
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgb(77 212 244 / 24%);
+  border: 1px solid color-mix(in srgb, var(--druks-color-accent) 24%, transparent);
   border-radius: var(--radius-panel);
   background: var(--demo-canvas);
   box-shadow: 0 28px 78px rgb(0 0 0 / 24%);
@@ -1105,21 +1077,21 @@ main section {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-family: var(--font-mono);
   font-size: 10px;
 }
 
 .code-window-bar {
   padding: 14px 18px;
-  background: rgb(77 212 244 / 4%);
+  background: color-mix(in srgb, var(--druks-color-accent) 4%, transparent);
 }
 
 .app-code-window pre {
   margin: 0;
   overflow-x: auto;
   padding: 28px 29px 31px;
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   font-family: var(--font-mono);
   font-size: 12px;
   line-height: 1.72;
@@ -1131,30 +1103,30 @@ main section {
 }
 
 .code-comment {
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
 }
 
 .code-name,
 .code-class {
-  color: var(--cyan);
+  color: var(--druks-color-accent);
 }
 
 .code-keyword {
-  color: var(--cyan);
+  color: var(--druks-color-accent);
 }
 
 .code-string {
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
 }
 
 .code-window-foot {
   justify-content: flex-start;
   padding: 13px 18px;
-  background: color-mix(in srgb, var(--text) 1.5%, transparent);
+  background: color-mix(in srgb, var(--druks-color-text-primary) 1.5%, transparent);
 }
 
 .code-window-foot span:nth-child(2) {
-  color: var(--cyan);
+  color: var(--druks-color-accent);
 }
 
 /* Start, footer */
@@ -1185,11 +1157,11 @@ main section {
   max-width: 900px;
   margin: 32px auto 0;
   padding: 8px 8px 8px 22px;
-  border: 1px solid var(--border);
-  border-top-color: var(--accent);
+  border: 1px solid var(--druks-color-border-default);
+  border-top-color: var(--druks-color-accent);
   border-radius: var(--radius-panel);
-  background: var(--surface);
-  color: var(--text);
+  background: var(--druks-color-surface);
+  color: var(--druks-color-text-primary);
   font-family: var(--font-mono);
   font-size: 12px;
   text-align: left;
@@ -1197,7 +1169,7 @@ main section {
 
 .terminal-prompt {
   flex: none;
-  color: var(--cyan);
+  color: var(--druks-color-accent);
   font-weight: 650;
 }
 
@@ -1216,9 +1188,9 @@ main section {
 }
 
 .copy-button.copied {
-  border-color: var(--cyan);
-  background: rgb(77 212 244 / 10%);
-  color: var(--cyan);
+  border-color: var(--druks-color-accent);
+  background: color-mix(in srgb, var(--druks-color-accent) 10%, transparent);
+  color: var(--druks-color-accent);
 }
 
 .start-actions {
@@ -1227,7 +1199,6 @@ main section {
 
 .site-footer {
   padding-block: 44px 50px;
-  background: rgb(6 10 17 / 88%);
 }
 
 .footer-grid {
@@ -1239,7 +1210,7 @@ main section {
 
 .footer-grid > p {
   margin: 0;
-  color: var(--text-mid);
+  color: var(--druks-color-text-secondary);
   font-size: 13px;
   text-align: center;
 }
@@ -1247,13 +1218,13 @@ main section {
 .footer-links {
   display: flex;
   gap: 16px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-family: var(--font-mono);
   font-size: 9.5px;
 }
 
 .footer-links a:hover {
-  color: var(--text);
+  color: var(--druks-color-text-primary);
 }
 
 /* Responsive */
@@ -1313,9 +1284,9 @@ main section {
 
   .mobile-nav summary {
     padding: 8px 10px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--druks-color-border-default);
     border-radius: var(--radius-control);
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     cursor: pointer;
     font-family: var(--font-mono);
     font-size: 11px;
@@ -1334,23 +1305,23 @@ main section {
     width: 190px;
     gap: 3px;
     padding: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--druks-color-border-default);
     border-radius: var(--radius-panel);
-    background: var(--surface);
+    background: var(--druks-color-surface);
     box-shadow: 0 24px 60px rgb(0 0 0 / 42%);
   }
 
   .mobile-nav nav a {
     padding: 9px 10px;
     border-radius: 6px;
-    color: var(--text-mid);
+    color: var(--druks-color-text-secondary);
     font-family: var(--font-mono);
     font-size: 11px;
   }
 
   .mobile-nav nav a:hover {
-    background: var(--selected);
-    color: var(--text);
+    background: var(--druks-color-selection-surface);
+    color: var(--druks-color-text-primary);
   }
 
   .mobile-nav nav .nav-cta {
@@ -1414,12 +1385,12 @@ main section {
 
   .graph-canvas::before {
     z-index: -2;
-    background: #2a3545;
+    background: var(--druks-color-border-default);
   }
 
   .graph-canvas::after {
     z-index: -1;
-    background: linear-gradient(180deg, var(--cyan), var(--border-strong) 68%, var(--cyan));
+    background: linear-gradient(180deg, var(--druks-color-accent), var(--druks-color-border-control) 68%, var(--druks-color-accent));
     transform: scaleY(var(--graph-progress));
     transition: transform 700ms var(--ease-out);
   }
@@ -1646,7 +1617,7 @@ main section {
   .reduced-work-list {
     display: block;
     margin: 11px 0 0;
-    color: var(--accent);
+    color: var(--druks-color-accent);
     font-family: var(--font-mono);
     font-size: 10px;
   }
@@ -1669,11 +1640,11 @@ body {
 .section-band,
 .lifted-band {
   border-top: 0;
-  background: var(--surface);
+  background: var(--druks-color-surface);
 }
 
 .lifted-band {
-  background: var(--surface-2);
+  background: var(--druks-color-surface-subtle);
 }
 
 main section {
@@ -1691,7 +1662,7 @@ main section {
 .extend-copy > p,
 .start-inner > p {
   max-width: 62ch;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 17px;
   line-height: 1.65;
 }
@@ -1726,28 +1697,28 @@ main section {
 }
 
 .button-primary {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--on-accent);
+  border-color: var(--druks-color-accent);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
 }
 
 .button-primary:hover {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--on-accent);
+  border-color: var(--druks-color-accent);
+  background: var(--druks-color-accent);
+  color: var(--druks-color-on-accent);
   transform: translateY(-2px);
 }
 
 .button-secondary {
-  border-color: var(--border);
+  border-color: var(--druks-color-border-default);
   background: transparent;
-  color: var(--text);
+  color: var(--druks-color-text-primary);
 }
 
 .button-secondary:hover {
-  border-color: var(--text-muted);
-  background: var(--surface-2);
-  color: var(--text);
+  border-color: var(--druks-color-text-tertiary);
+  background: var(--druks-color-surface-subtle);
+  color: var(--druks-color-text-primary);
   transform: translateY(-2px);
 }
 
@@ -1774,7 +1745,7 @@ main section {
   bottom: -5px;
   left: 0;
   height: 1px;
-  background: var(--accent);
+  background: var(--druks-color-accent);
   content: '';
   transform: scaleX(0);
   transform-origin: left;
@@ -1793,20 +1764,20 @@ main section {
   padding: 9px 0;
   border: 0;
   background: transparent;
-  color: var(--accent);
+  color: var(--druks-color-accent);
 }
 
 .desktop-nav .nav-cta:hover,
 .mobile-nav .nav-cta:hover {
   background: transparent;
-  color: var(--accent);
+  color: var(--druks-color-accent);
 }
 
 .skip-link,
 .copy-button {
-  border: 1px solid var(--text);
+  border: 1px solid var(--druks-color-text-primary);
   background: transparent;
-  color: var(--text);
+  color: var(--druks-color-text-primary);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transition:
@@ -1816,14 +1787,14 @@ main section {
 }
 
 .skip-link {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--druks-color-accent);
+  color: var(--druks-color-accent);
 }
 
 .copy-button:hover {
-  border-color: var(--text);
-  background: var(--text);
-  color: var(--bg);
+  border-color: var(--druks-color-text-primary);
+  background: var(--druks-color-text-primary);
+  color: var(--druks-color-background);
 }
 
 /* Hero poster */
@@ -1866,18 +1837,18 @@ main section {
 .hero-sub {
   max-width: 58ch;
   margin-top: 14px;
-  color: var(--text-muted);
+  color: var(--druks-color-text-tertiary);
   font-size: 18px;
   line-height: 1.62;
 }
 .app-code-window {
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border: 1px solid var(--druks-color-border-default);
+  background: var(--druks-color-surface);
 }
 
 .ship-graph {
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--cyan);
+  border: 1px solid var(--druks-color-border-default);
+  border-top: 3px solid var(--druks-color-accent);
   background: var(--demo-canvas);
 }
 .ship-graph,
@@ -1887,8 +1858,8 @@ main section {
 .graph-chrome,
 .code-window-bar,
 .code-window-foot {
-  border-bottom: 1px solid var(--border);
-  background: var(--demo-raised-surface);
+  border-bottom: 1px solid var(--druks-color-border-default);
+  background: var(--druks-color-surface-subtle);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1913,16 +1884,16 @@ main section {
   transform: translate(-50%, -50%) translateY(-5px) scale(1.035);
 }
 .code-window-foot {
-  background: var(--demo-raised-surface);
+  background: var(--druks-color-surface-subtle);
 }
 
 .app-code-window {
-  border-top-color: var(--cyan);
+  border-top-color: var(--druks-color-accent);
 }
 
 .site-footer {
   border-top: 0;
-  background: var(--surface);
+  background: var(--druks-color-surface);
 }
 
 @media (max-width: 960px) {
@@ -1938,8 +1909,8 @@ main section {
   }
 
   .mobile-nav nav {
-    border: 1px solid var(--border);
-    background: var(--surface);
+    border: 1px solid var(--druks-color-border-default);
+    background: var(--druks-color-surface);
   }
 
   .mobile-nav nav .nav-cta {
@@ -2064,19 +2035,19 @@ main section > .wrap,
   overflow: hidden;
   margin: clamp(56px, 7vw, 92px) 0 0;
   border: 0;
-  border-top: 4px solid var(--cyan);
+  border-top: 4px solid var(--druks-color-accent);
   background: transparent;
-  box-shadow: var(--shadow-dialog);
+  box-shadow: var(--druks-shadow-dialog);
 }
 
 .product-console {
-  --console-bg: var(--surface);
-  --console-surface: var(--surface-2);
-  --console-surface-raised: var(--surface-3);
-  --console-line: var(--border);
-  --console-text: var(--text);
-  --console-muted: var(--text-secondary);
-  --console-faint: var(--text-tertiary);
+  --console-bg: var(--druks-color-surface);
+  --console-surface: var(--druks-color-surface-subtle);
+  --console-surface-raised: var(--druks-color-surface-raised);
+  --console-line: var(--druks-color-border-default);
+  --console-text: var(--druks-color-text-primary);
+  --console-muted: var(--druks-color-text-secondary);
+  --console-faint: var(--druks-color-text-tertiary);
   position: relative;
   width: 100%;
   min-height: 700px;
@@ -2144,8 +2115,8 @@ main section > .wrap,
 
 .product-console-quota {
   padding: 3px 8px;
-  border: 1px solid color-mix(in srgb, var(--success) 55%, var(--border));
-  color: var(--success);
+  border: 1px solid color-mix(in srgb, var(--druks-color-status-success) 55%, var(--druks-color-border-default));
+  color: var(--druks-color-status-success);
 }
 
 .product-console-settings {
@@ -2178,8 +2149,8 @@ main section > .wrap,
   min-width: 150px;
   height: 30px;
   padding: 0 10px;
-  border: 1px solid var(--border-strong);
-  border-left: 2px solid var(--brand);
+  border: 1px solid var(--druks-color-border-control);
+  border-left: 2px solid var(--druks-color-brand-mark);
   border-radius: 3px;
   background: var(--console-bg);
   color: var(--console-text);
@@ -2191,7 +2162,7 @@ main section > .wrap,
 
 .product-switcher-trigger:hover,
 .product-switcher-trigger[aria-expanded='true'] {
-  border-color: var(--accent);
+  border-color: var(--druks-color-accent);
   background: var(--console-surface);
 }
 
@@ -2201,7 +2172,7 @@ main section > .wrap,
   flex: none;
   width: 15px;
   height: 15px;
-  color: var(--cyan);
+  color: var(--druks-color-accent);
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -2211,7 +2182,7 @@ main section > .wrap,
 
 .product-switcher-caret {
   margin-left: auto;
-  color: var(--cyan);
+  color: var(--druks-color-accent);
   font-size: 10px;
 }
 
@@ -2222,9 +2193,9 @@ main section > .wrap,
   right: 2px;
   padding: 5px 8px;
   border-radius: 4px;
-  background: var(--cyan);
-  box-shadow: var(--shadow-dialog);
-  color: var(--cyan-ink);
+  background: var(--druks-color-accent);
+  box-shadow: var(--druks-shadow-dialog);
+  color: var(--druks-color-on-accent);
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 720;
@@ -2242,7 +2213,7 @@ main section > .wrap,
   width: 0;
   height: 0;
   border-right: 5px solid transparent;
-  border-bottom: 6px solid var(--cyan);
+  border-bottom: 6px solid var(--druks-color-accent);
   border-left: 5px solid transparent;
   content: '';
 }
@@ -2288,10 +2259,10 @@ main section > .wrap,
   left: 0;
   width: 320px;
   padding: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--druks-color-border-default);
   border-radius: 4px;
   background: var(--console-bg);
-  box-shadow: var(--shadow-dialog);
+  box-shadow: var(--druks-shadow-dialog);
 }
 
 .product-switcher-option {
@@ -2347,10 +2318,10 @@ main section > .wrap,
   display: block;
   margin: 0 16px 12px;
   padding: 8px 11px;
-  border: 1px solid color-mix(in srgb, var(--brand) 48%, var(--border));
+  border: 1px solid color-mix(in srgb, var(--druks-color-brand-mark) 48%, var(--druks-color-border-default));
   border-radius: 4px;
-  background: color-mix(in srgb, var(--brand) 10%, var(--console-surface));
-  color: var(--accent);
+  background: color-mix(in srgb, var(--druks-color-brand-mark) 10%, var(--console-surface));
+  color: var(--druks-color-accent);
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 650;
@@ -2386,12 +2357,12 @@ main section > .wrap,
   gap: 7px;
   padding: 14px 16px;
   border-left: 2px solid transparent;
-  border-bottom: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--druks-color-border-subtle);
 }
 
 .product-panel-list-item.is-active {
-  border-left-color: var(--brand);
-  background: var(--selected);
+  border-left-color: var(--druks-color-brand-mark);
+  background: var(--druks-color-selection-surface);
 }
 
 .product-panel-list-item > div {
@@ -2415,7 +2386,7 @@ main section > .wrap,
 }
 
 .product-panel-list-item.is-active small {
-  color: var(--warning);
+  color: var(--druks-color-status-warning);
 }
 
 .product-panel-list-item p {
@@ -2446,9 +2417,9 @@ main section > .wrap,
 
 .product-panel-meta > span:first-child {
   padding: 4px 9px;
-  border: 1px solid color-mix(in srgb, var(--warning) 45%, var(--border));
+  border: 1px solid color-mix(in srgb, var(--druks-color-status-warning) 45%, var(--druks-color-border-default));
   border-radius: 99px;
-  color: var(--warning);
+  color: var(--druks-color-status-warning);
 }
 
 .product-panel-question {
@@ -2474,7 +2445,7 @@ main section > .wrap,
 }
 
 .product-panel-advisor {
-  --advisor: var(--cyan);
+  --advisor: var(--druks-color-accent);
   position: relative;
   overflow: hidden;
   min-height: 176px;
@@ -2493,15 +2464,15 @@ main section > .wrap,
 }
 
 .product-panel-advisor.is-opportunity {
-  --advisor: var(--success);
+  --advisor: var(--druks-color-status-success);
 }
 
 .product-panel-advisor.is-risk {
-  --advisor: var(--danger);
+  --advisor: var(--druks-color-status-danger);
 }
 
 .product-panel-advisor.is-execution {
-  --advisor: var(--info);
+  --advisor: var(--druks-color-status-info);
 }
 
 .product-panel-advisor > div {
@@ -2544,9 +2515,9 @@ main section > .wrap,
   align-items: center;
   margin-top: 12px;
   padding: 15px 17px;
-  border: 1px solid color-mix(in srgb, var(--brand) 28%, var(--border));
+  border: 1px solid color-mix(in srgb, var(--druks-color-brand-mark) 28%, var(--druks-color-border-default));
   border-radius: 9px;
-  background: color-mix(in srgb, var(--brand) 4%, var(--console-surface));
+  background: color-mix(in srgb, var(--druks-color-brand-mark) 4%, var(--console-surface));
 }
 
 .product-panel-moderator > div:first-child {
@@ -2556,7 +2527,7 @@ main section > .wrap,
 
 .product-panel-moderator > div:first-child span,
 .product-panel-call > span:first-child {
-  color: var(--accent);
+  color: var(--druks-color-accent);
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: 0.1em;
@@ -2590,8 +2561,8 @@ main section > .wrap,
 }
 
 .product-panel-call > span.is-selected {
-  border-color: color-mix(in srgb, var(--danger) 42%, var(--border));
-  color: var(--danger);
+  border-color: color-mix(in srgb, var(--druks-color-status-danger) 42%, var(--druks-color-border-default));
+  color: var(--druks-color-status-danger);
 }
 
 .product-generic-copy p {
@@ -2657,7 +2628,7 @@ main section > .wrap,
   position: absolute;
   top: 16px;
   left: 16px;
-  color: var(--cyan);
+  color: var(--druks-color-accent);
   content: attr(data-index);
   font-size: 9px;
 }
@@ -2667,7 +2638,7 @@ main section > .wrap,
   display: grid;
   gap: 7px;
   padding: 20px;
-  border-left: 2px solid var(--cyan);
+  border-left: 2px solid var(--druks-color-accent);
   background: var(--console-surface);
 }
 
@@ -2743,8 +2714,8 @@ main section > .wrap,
 .graph-canvas {
   background: radial-gradient(
     ellipse at 50% 48%,
-    color-mix(in srgb, var(--surface-3) 34%, transparent) 0%,
-    color-mix(in srgb, var(--surface-3) 18%, transparent) 58%,
+    color-mix(in srgb, var(--druks-color-surface-raised) 34%, transparent) 0%,
+    color-mix(in srgb, var(--druks-color-surface-raised) 18%, transparent) 58%,
     transparent 100%
   );
 }
@@ -2789,7 +2760,7 @@ main section > .wrap,
 .product-ui,
 .ship-graph,
 .app-code-window {
-  border-color: var(--demo-border);
+  border-color: var(--druks-color-border-default);
   background-color: var(--demo-canvas);
 }
 
@@ -2799,17 +2770,17 @@ main section > .wrap,
   border-bottom-width: 1px;
   border-left-width: 1px;
   border-style: solid;
-  border-top-color: var(--cyan);
+  border-top-color: var(--druks-color-accent);
 }
 
 .product-console {
-  --console-bg: var(--surface);
-  --console-surface: var(--surface-2);
-  --console-surface-raised: var(--surface-3);
-  --console-line: var(--demo-border);
-  --console-text: var(--text);
-  --console-muted: var(--text-secondary);
-  --console-faint: var(--text-tertiary);
+  --console-bg: var(--druks-color-surface);
+  --console-surface: var(--druks-color-surface-subtle);
+  --console-surface-raised: var(--druks-color-surface-raised);
+  --console-line: var(--druks-color-border-default);
+  --console-text: var(--druks-color-text-primary);
+  --console-muted: var(--druks-color-text-secondary);
+  --console-faint: var(--druks-color-text-tertiary);
   background: var(--demo-canvas);
   color: var(--console-text);
 }
@@ -2825,21 +2796,21 @@ main section > .wrap,
 .graph-canvas {
   background: radial-gradient(
     ellipse at 50% 48%,
-    color-mix(in srgb, var(--brand) 3%, transparent) 0%,
+    color-mix(in srgb, var(--druks-color-brand-mark) 3%, transparent) 0%,
     transparent 66%
   );
 }
 
 .app-code-window {
-  border-top-color: var(--cyan);
+  border-top-color: var(--druks-color-accent);
   background:
-    linear-gradient(118deg, color-mix(in srgb, var(--brand) 3%, transparent), transparent 46%),
+    linear-gradient(118deg, color-mix(in srgb, var(--druks-color-brand-mark) 3%, transparent), transparent 46%),
     var(--demo-canvas);
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .site-header {
-    background: var(--surface);
+    background: var(--druks-color-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
