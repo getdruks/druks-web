@@ -11,6 +11,8 @@ const defined = new Set(
   files.flatMap(([, source]) => [...source.matchAll(/(--[\w-]+)['"]?\s*:/g)].map(([, name]) => name)),
 )
 for (const [file, source] of files) {
+  // The vendored design system is copied as-is and also styles app parts that set their own tokens.
+  if (file.startsWith('vendor/')) continue
   for (const [, name] of source.matchAll(/var\(\s*(--[\w-]+)/g)) {
     if (!defined.has(name)) throw new Error(`${file} uses ${name}, which nothing defines.`)
   }
