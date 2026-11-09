@@ -1,0 +1,214 @@
+/* Druks components. Token variables only: no literal color, spacing, size or radius except 1 px borders.
+   Shared by the design system page and the mockup. States: native pseudo-classes and ARIA attributes;
+   the is-* classes exist only so the design system page can show a state without hovering. */
+
+/* Button: variants primary, secondary, quiet, danger; shape icon (icon only, needs aria-label) */
+.button{--base:transparent;--ov:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:var(--space-8);min-height:var(--dui-control-height);padding:0 var(--space-16);border:1px solid transparent;border-radius:var(--dui-radius-control);font:500 var(--fs-control)/1 var(--font-sans);cursor:pointer;color:var(--text);background:var(--base);text-decoration:none;white-space:nowrap}
+.button.primary{--base:var(--accent);--ov:var(--on-accent);border-color:var(--accent);color:var(--on-accent)}
+.button.secondary{--base:var(--surface);border-color:var(--border-strong)}
+.button.quiet{--base:transparent}
+.button.danger{--base:var(--surface);--ov:var(--danger);border-color:var(--danger);color:var(--danger)}
+.button.icon{width:var(--dui-control-height);min-width:var(--dui-control-height);padding:0}
+.button svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;stroke-width:var(--icon-stroke-sm)}
+.button.icon svg{width:var(--icon-md);height:var(--icon-md);stroke-width:var(--icon-stroke-md)}
+.button:hover,.button.is-hover{background:color-mix(in srgb,var(--ov) var(--state-hover),var(--base))}
+.button:active,.button.is-pressed{background:color-mix(in srgb,var(--ov) var(--state-pressed),var(--base))}
+.button:focus-visible,.button.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.button:disabled,.button.is-disabled{background:color-mix(in srgb,var(--text) var(--state-disabled-fill),transparent);border-color:transparent;color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent);cursor:not-allowed}
+.button.is-busy::before,.button[aria-busy=true]::before{content:'';width:var(--icon-sm);height:var(--icon-sm);border:var(--focus-width) solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+.button.icon.is-busy>svg,.button.icon[aria-busy=true]>svg{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.button.is-busy::before,.button[aria-busy=true]::before{animation:none}}
+
+/* Link. A link that stands alone as a button gets the full touch target. */
+.link{color:var(--accent);text-decoration:underline;text-underline-offset:var(--space-4);background:none;border:0;padding:0;font:inherit;cursor:pointer}
+button.link{display:inline-flex;align-items:center;min-height:var(--dui-control-height);font:500 var(--fs-control)/1.4 var(--font-sans);text-align:left}
+.link:hover,.link.is-hover{color:var(--text)}
+.link:active{color:var(--text-secondary)}
+.link:focus-visible,.link.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.link:disabled,.link.is-disabled{color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent);text-decoration:none;cursor:not-allowed}
+
+/* Navigation item: a link or button that opens a page. Selected = neutral fill, weight 600, normal text. */
+.nav{display:flex;align-items:center;gap:var(--space-12);width:100%;min-height:var(--dui-control-height);padding:0 var(--space-12);border:0;border-radius:var(--dui-radius-control);background:transparent;color:var(--text);font:400 var(--fs-control)/1.4 var(--font-sans);text-align:left;text-decoration:none;cursor:pointer}
+.nav svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;stroke-width:var(--icon-stroke-sm)}
+.nav:hover,.nav.is-hover{background:color-mix(in srgb,var(--text) var(--state-hover),transparent)}
+.nav:active,.nav.is-pressed{background:color-mix(in srgb,var(--text) var(--state-pressed),transparent)}
+.nav:focus-visible,.nav.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.nav[aria-current=page],.nav.is-selected{background:var(--selected);font-weight:600}
+.nav:disabled,.nav.is-disabled{color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent);cursor:not-allowed}
+
+/* Tabs: local navigation between the pages of one app. */
+.tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid var(--border-soft)}
+.tab{background:none;border:0;border-radius:var(--dui-radius-control) var(--dui-radius-control) 0 0;padding:var(--space-12);min-height:var(--dui-control-height);color:var(--text-secondary);font:500 var(--fs-control)/1.4 var(--font-sans);cursor:pointer}
+.tab:hover,.tab.is-hover{color:var(--text);background:color-mix(in srgb,var(--text) var(--state-hover),transparent)}
+.tab:active,.tab.is-pressed{color:var(--text);background:color-mix(in srgb,var(--text) var(--state-pressed),transparent)}
+.tab:focus-visible,.tab.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.tab[aria-current=page],.tab.is-selected{color:var(--text);font-weight:600;box-shadow:0 var(--focus-width) var(--accent)}
+.tab:disabled,.tab.is-disabled{color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent);cursor:not-allowed}
+
+/* Label: the text of a control. text-box-trim centers the cap height, not the line box, so text and icons line up. */
+.label{text-box:trim-both cap alphabetic}
+
+/* Badge: a short status label. Variants: tone (default neutral, accent, success, warning, danger), shape (rounded), dashed. */
+.badge{display:inline-flex;align-items:center;gap:var(--space-8);height:var(--space-24);padding:0 var(--space-8);border:1px solid var(--text-tertiary);border-radius:var(--radius-small);color:var(--text-tertiary);font:600 var(--fs-meta)/1 var(--font-sans);white-space:nowrap;vertical-align:middle}
+.badge svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;stroke-width:var(--icon-stroke-sm)}
+.badge.accent{border-color:var(--accent);color:var(--accent)}.badge.success{border-color:var(--success);color:var(--success)}.badge.warning{border-color:var(--warning);color:var(--warning)}.badge.danger{border-color:var(--danger);color:var(--danger)}
+.badge.rounded{border-radius:var(--radius-full)}.badge.dashed{border-style:dashed}
+
+/* Field: text, search, date, select and textarea. The native control sits inside the .field box.
+   Optional icons are direct children (leading icon first, chevron last on a select). */
+.field{position:relative;display:flex;align-items:center;gap:var(--space-12);min-height:var(--dui-control-height);padding:0 calc(var(--space-12) - 1px);background:var(--input);border:1px solid var(--border-strong);border-radius:var(--dui-radius-control);color:var(--text);font:400 var(--fs-control)/1.4 var(--font-sans)}
+.field>svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;color:var(--text-tertiary);stroke-width:var(--icon-stroke-sm)}
+.field :is(input,select,textarea){flex:1;min-width:0;align-self:center;margin:0;padding:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;line-height:normal;text-overflow:ellipsis}
+.field :is(input,select){appearance:none}
+.field input{text-box:trim-both cap alphabetic}
+.field:has(>select){gap:0;padding:0}
+.field:has(>select)>select{align-self:stretch;min-height:calc(var(--dui-control-height) - 2px);padding:0 var(--space-40) 0 var(--space-12);cursor:pointer}
+.field select+svg{position:absolute;top:50%;right:var(--space-12);transform:translateY(-50%);margin:0;pointer-events:none}
+.field input[type=date]::-webkit-calendar-picker-indicator{position:absolute;top:0;right:0;width:var(--dui-control-height);height:100%;margin:0;padding:0;opacity:0;cursor:pointer}
+.field textarea{align-self:stretch}
+.field :is(input,textarea)::placeholder{color:var(--text-tertiary);opacity:1}
+.field select{appearance:none;cursor:pointer}.field select:disabled{cursor:not-allowed}
+.field:has(textarea){align-items:flex-start;padding-right:0}
+.field textarea{min-height:var(--space-96);padding:var(--space-12) 0;line-height:1.5;resize:vertical}
+.field:hover,.field.is-hover{border-color:var(--text-tertiary)}
+.field:focus-within,.field.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.field:has(:disabled),.field.is-disabled{background:color-mix(in srgb,var(--text) var(--state-disabled-fill),transparent);border-color:transparent;color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent);cursor:not-allowed}
+@media(max-width:650px){.field :is(input,select,textarea){font-size:var(--fs-reading)}}
+.field:has(:is(input,textarea)[readonly]),.field.is-readonly{background:var(--surface-2);border-color:var(--border)}
+.field:has([aria-invalid=true]),.field.is-error{border-color:var(--danger)}
+.field[aria-busy=true],.field.is-busy{border-style:dashed}
+
+/* Field group: the accessible composition for a visible label, a Field, optional help and an error.
+   The group owns only the relationship and spacing; all control visuals stay on .field. */
+.field-group{display:grid;gap:var(--space-8);font:500 var(--fs-control)/1.4 var(--font-sans);color:var(--text)}
+.field-group>.field{width:100%}
+.field-help{color:var(--text-secondary);font:400 var(--fs-meta)/1.4 var(--font-sans)}
+.field-error{color:var(--danger);font:400 var(--fs-meta)/1.4 var(--font-sans)}
+
+/* Page header: one H1, optional supporting text, and the page actions. */
+.page-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-20);margin-bottom:var(--space-24)}
+.page-header-copy{min-width:0}
+.page-header h1{margin:0}
+.page-header-copy>p{margin:var(--space-4) 0 0}
+.page-header-actions{display:flex;flex:none;flex-wrap:nowrap;justify-content:flex-end;align-items:center;gap:var(--space-8)}
+@media(max-width:650px){.page-header{gap:var(--space-16)}.page-header-actions{width:100%;justify-content:flex-start}}
+
+/* Callout: one concise, status-toned fact. */
+.callout{padding:var(--space-12) var(--space-16);border:1px solid transparent;border-radius:var(--dui-radius-surface);font:400 var(--fs-control)/1.4 var(--font-sans);color:var(--text)}
+.callout.info{background:var(--info-surface);border-color:var(--info)}.callout.success{background:var(--success-surface);border-color:var(--success)}.callout.warning{background:var(--warning-surface);border-color:var(--warning)}.callout.danger{background:var(--danger-surface);border-color:var(--danger)}
+.callout b{color:var(--text)}
+.callout>svg{width:var(--icon-md);height:var(--icon-md);margin-right:var(--space-12);vertical-align:middle;stroke-width:var(--icon-stroke-md)}
+
+/* Loading: the logo is decorative; nearby status text communicates progress. */
+.loading{min-height:var(--space-128);display:grid;place-items:center;align-content:center;gap:var(--space-12);color:var(--text-secondary);font:400 var(--fs-control)/1.4 var(--font-sans)}
+.loading img{width:var(--space-64);height:var(--space-64);animation:logo-loading 1.2s ease-in-out infinite}
+@keyframes logo-loading{50%{transform:scale(.84);opacity:.68}}
+@media (prefers-reduced-motion:reduce){.loading img{animation:none}}
+
+/* Brand lockup: one shared mark-plus-wordmark treatment. */
+.brand-lockup{display:inline-flex;align-items:center;gap:0;color:var(--text);font:700 var(--fs-title)/1 var(--font-sans);white-space:nowrap;text-decoration:none}
+.brand-lockup-mark{display:block;flex:none;width:var(--space-48);height:var(--space-48);background:var(--brand);mask-position:center;mask-size:contain;mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat}
+.brand-lockup-demo{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-24);min-height:var(--space-64)}
+.brand-lockup-example{display:grid;gap:var(--space-8);justify-items:start}.brand-lockup-example>span:first-child{color:var(--text-tertiary);font:500 var(--fs-meta)/1.4 var(--font-sans)}
+
+/* Checkbox and switch: native checkbox controls, visually expressed by the system. */
+.choice{display:inline-flex;align-items:center;gap:var(--space-8);min-height:var(--dui-control-height);font:500 var(--fs-control)/1.4 var(--font-sans);color:var(--text)}
+.checkbox,.switch{appearance:none;box-sizing:border-box;display:inline-grid;place-content:center;margin:0;vertical-align:middle;cursor:pointer;background:var(--surface);border:1px solid var(--border-strong);color:var(--accent)}
+.checkbox{width:var(--icon-md);height:var(--icon-md);border-radius:var(--radius-small)}
+.checkbox::after{content:'';width:var(--space-8);height:var(--space-4);border:solid var(--on-accent);border-width:0 0 var(--focus-width) var(--focus-width);transform:translateY(calc(var(--focus-width) / -2)) rotate(-45deg);opacity:0}
+.checkbox:checked,.checkbox:indeterminate{background:var(--accent);border-color:var(--accent)}
+.checkbox:checked::after{opacity:1}.checkbox:indeterminate::after{width:var(--space-8);height:0;border-width:0 0 var(--focus-width);transform:none;opacity:1}
+.switch{width:var(--space-40);height:var(--space-24);padding:var(--space-4);border-radius:var(--radius-full);place-content:center start;background:var(--surface-3)}
+.switch::after{content:'';width:var(--space-12);height:var(--space-12);border-radius:var(--radius-full);background:var(--text-tertiary);transition:transform .2s ease,background .2s ease}
+.switch:checked{background:var(--accent);border-color:var(--accent)}.switch:checked::after{transform:translateX(var(--space-16));background:var(--on-accent)}
+.checkbox:hover:not(:disabled),.switch:hover:not(:disabled){border-color:var(--text-tertiary)}
+.checkbox:focus-visible,.checkbox.is-focus,.switch:focus-visible,.switch.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}
+.checkbox:disabled,.switch:disabled,.checkbox.is-disabled,.switch.is-disabled{opacity:var(--state-disabled-content);cursor:not-allowed}
+
+/* A bordered control starts its content one border width in, so icons and text line up with borderless siblings (navigation items). */
+.badge.info{border-color:var(--info);color:var(--info)}
+.badge.tinted{border-color:transparent;background:var(--surface-2)}
+.badge.tinted.accent,.badge.tinted.info{background:var(--info-surface)}.badge.tinted.success{background:var(--success-surface)}.badge.tinted.warning{background:var(--warning-surface)}.badge.tinted.danger{background:var(--danger-surface)}
+.badge.text{border-color:transparent;padding:0;background:transparent}
+
+/* Quiet field: only a bottom edge, for dense places such as a sidebar search. The edge is --border-soft, the lightest border: it does not reach 3:1, so it is for dense, non-critical places only. */
+.field.quiet{padding:0 var(--space-12);background:transparent;border-color:var(--border-soft);border-width:0 0 1px;border-radius:0}
+.field.quiet:focus-within,.field.quiet.is-focus{border-radius:var(--dui-radius-control)}
+.field.quiet:has([aria-invalid=true]),.field.quiet.is-error{border-color:var(--danger)}
+
+/* Scrollbars: thin, thumb in --border-soft on a transparent track. The thumb is below 3:1, so scrollbars are not fully accessible. */
+*{scrollbar-width:thin;scrollbar-color:var(--border-soft) transparent}
+
+/* Panel: a shared surface boundary. Layout and density stay with the composition inside it. */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--dui-radius-surface)}
+
+/* Section header: a local heading with an optional action group. */
+.section-header{display:flex;align-items:center;justify-content:space-between;gap:var(--space-12)}.section-header h2{margin:0;font-size:var(--fs-section);line-height:1.3}.section-header-actions{display:flex;align-items:center;gap:var(--space-8);flex:none}
+
+/* Conversation row: selectable chat history item. The group heading belongs to the surrounding list. */
+.conversation{display:grid;gap:var(--space-4);width:100%;min-height:var(--density-row);padding:var(--density-pad) var(--space-12);border:0;border-radius:var(--dui-radius-control);background:transparent;color:var(--text);font:400 var(--fs-control)/1.4 var(--font-sans);text-align:left;cursor:pointer}
+.conversation:hover{background:color-mix(in srgb,var(--text) var(--state-hover),transparent)}.conversation:active{background:color-mix(in srgb,var(--text) var(--state-pressed),transparent)}.conversation:focus-visible{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}.conversation[aria-current=true]{background:var(--selected)}.conversation[aria-current=true] .conversation-title{font-weight:600}
+.conversation-title{display:flex;align-items:center;gap:var(--space-8);min-width:0;font-weight:500;line-height:1.5;overflow-wrap:anywhere}.conversation-title svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;margin-left:auto;color:var(--text-tertiary);stroke-width:var(--icon-stroke-sm)}
+.pin-solid{color:var(--text-tertiary)}.pin-solid path:last-child{fill:currentColor}
+.conversation-meta{display:flex;align-items:center;gap:var(--space-8);flex-wrap:wrap;color:var(--text-tertiary);font-size:var(--fs-meta)}.conversation-meta svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;stroke-width:var(--icon-stroke-sm)}.conversation-meta time{margin-left:auto;font-variant-numeric:tabular-nums}
+
+/* Proposed chat pattern: history is one full-width stack; every message owns a full-width row. */
+.chat-transcript{display:grid;align-content:end;gap:var(--space-24);width:100%;min-height:100%}.message{display:flex;width:100%;min-width:0}.message.user{justify-content:flex-end}.message.agent{justify-content:flex-start}.message-bubble{display:grid;gap:var(--space-4);inline-size:fit-content;max-inline-size:min(100%,var(--dui-measure));padding:var(--space-16);background:var(--surface);border:1px solid var(--border);border-radius:var(--dui-radius-surface);font:400 var(--fs-reading)/1.7 var(--font-sans);color:var(--text)}
+.message.user .message-bubble{background:var(--surface-2);border-color:transparent}.message-bubble .message-meta{display:flex;align-items:center;justify-content:space-between;width:100%;margin:0;color:var(--text-tertiary);font:400 var(--fs-control)/1.4 var(--font-sans)}.message.user .message-meta{flex-direction:row-reverse}.message-bubble :is(p,h3){margin:0}.message-bubble .disclosure{margin:0;padding:0;border:0}.message-bubble .disclosure :is(h3,p){margin:var(--space-8) 0 0}.message-bubble :is(.dp-actions,.dp-section){margin:0}.message .button{justify-self:start}
+
+/* Proposed Disclosure: native progressive disclosure for technical or supporting detail. */
+.disclosure{margin:0;padding:0;border:0;font:400 var(--fs-control)/1.5 var(--font-sans)}.disclosure summary{display:flex;align-items:center;min-height:var(--dui-control-height);padding:0 var(--space-12);border-radius:var(--dui-radius-control);color:var(--text-tertiary);cursor:pointer}.disclosure summary:hover,.disclosure.is-hover summary{background:color-mix(in srgb,var(--text) var(--state-hover),transparent)}.disclosure summary:active,.disclosure.is-pressed summary{background:color-mix(in srgb,var(--text) var(--state-pressed),transparent)}.disclosure summary:focus-visible,.disclosure.is-focus summary{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}.disclosure[open] summary{color:var(--text)}.disclosure :is(h3,p){margin:var(--space-8) 0 0}.disclosure h3{font-size:var(--fs-control);color:var(--text)}
+/* Proposed compact Disclosure: the parent composition owns outer spacing. */
+.disclosure.compact{margin:0;padding:0;border:0}.disclosure.compact :is(h3,p){margin:var(--space-8) 0 0}
+/* Proposed leading-icon Disclosure variant: the icon is a 16 px visual cue, never the only label. */
+.disclosure.has-icon .disclosure-start,.disclosure.group .disclosure-start{display:flex;align-items:center;gap:var(--space-8);min-width:0}.disclosure.has-icon .disclosure-start svg,.disclosure.group .disclosure-start svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;color:var(--text-tertiary);stroke-width:var(--icon-stroke-sm)}
+/* Proposed Disclosure group: borderless section control used by the Chat conversation list. */
+.disclosure.group{margin:0;padding:0;border:0}.disclosure.group summary{display:flex;align-items:center;min-height:var(--dui-control-height);padding:0 var(--space-12);color:var(--text-tertiary);font:500 var(--fs-control)/1.4 var(--font-sans);list-style:none}.disclosure.group summary::-webkit-details-marker{display:none}.disclosure.group summary>span+span{margin-left:auto;font-variant-numeric:tabular-nums}.disclosure.group summary>svg{width:var(--icon-sm);height:var(--icon-sm);margin-left:var(--space-8);stroke-width:var(--icon-stroke-sm);transition:transform .2s ease}.disclosure.group:not([open]) summary>svg{transform:rotate(-90deg)}.disclosure.group summary:focus-visible{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset);border-radius:var(--dui-radius-control)}.disclosure.group.dense summary{min-height:var(--space-32);font-size:var(--fs-meta)}
+
+/* Proposed Chat conversation-list composition: controls and its disclosure stack. */
+.conversation-list{display:grid;gap:0;margin-top:var(--space-16)}
+
+/* Description list and empty state: compact semantic compositions, not tables or illustrations. */
+.description-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-12);margin:0}.description-list div{display:grid;gap:var(--space-4)}.description-list dt{color:var(--text-tertiary);font-size:var(--fs-meta)}.description-list dd{margin:0;overflow-wrap:anywhere}.empty-state{display:grid;justify-items:center;gap:var(--space-8);padding:var(--space-24);color:var(--text-secondary);text-align:center}.empty-state h2{margin:0;color:var(--text);font-size:var(--fs-section)}.empty-state p{margin:0}
+@media(max-width:650px){.description-list{grid-template-columns:minmax(0,1fr)}}
+
+/* Composer: Field plus Send Button. Guidance is tertiary companion text, never the label. */
+.composer{display:grid;gap:var(--space-8)}.composer .field{align-items:flex-start}.composer textarea{min-height:var(--space-96)}.composer-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-16)}.composer-guidance{margin:0;color:var(--text-tertiary);font:400 var(--fs-control)/1.5 var(--font-sans)}.composer-guidance span{display:block}
+@media(min-width:651px){.composer{grid-template-columns:minmax(0,1fr) auto;column-gap:var(--space-16);row-gap:var(--space-8)}.composer>.field{grid-column:1/-1}.composer-footer{grid-column:2;grid-row:2}.composer-guidance{grid-column:1;grid-row:2;align-self:center}.composer-guidance span{display:inline}.composer-guidance span+span::before{content:' · '}}
+
+/* To decide: Selectable row family and collection/detail layout.
+   These are shared candidate styles so the proposal and mockup can exercise the same composition.
+   They are not approved components or global tokens. */
+.selectable-row{display:grid;grid-template-columns:var(--space-32) minmax(0,1fr) auto;gap:var(--space-12);align-items:center;width:100%;min-height:var(--dui-control-height);padding:var(--space-12);border:0;background:transparent;color:var(--text);font:400 var(--fs-control)/1.4 var(--font-sans);text-align:left;cursor:pointer;transition:background-color var(--motion-fast) var(--motion-ease),color var(--motion-fast) var(--motion-ease)}
+.selectable-row+.selectable-row{margin-top:var(--space-4)}.selectable-row-copy{display:grid;gap:var(--space-4);min-width:0}.selectable-row-icon{display:grid;place-items:center;width:var(--space-32);height:var(--space-32);background:var(--surface-2);border-radius:var(--dui-radius-control);color:var(--accent)!important;transition:background-color var(--motion-fast) var(--motion-ease),color var(--motion-fast) var(--motion-ease)}
+.selectable-row-icon.is-app-identity{background:color-mix(in srgb,var(--identity-accent) 8%,var(--surface));color:var(--identity-accent)!important}
+.selectable-row:hover,.selectable-row.is-hover{background:color-mix(in srgb,var(--text) var(--state-hover),transparent)}.selectable-row:active,.selectable-row.is-pressed{background:color-mix(in srgb,var(--text) var(--state-pressed),transparent)}.selectable-row:focus-visible,.selectable-row.is-focus{outline:var(--focus-width) solid var(--accent);outline-offset:var(--focus-offset)}.selectable-row[aria-current=true]{background:var(--selected)}.selectable-row:disabled{cursor:not-allowed;color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent)}.selectable-row:disabled .selectable-row-icon{color:color-mix(in srgb,var(--text) var(--state-disabled-content),transparent)!important}
+.d-detail-prototype{--motion-fast:160ms;--motion-standard:240ms;--motion-ease:cubic-bezier(.2,0,0,1);display:grid;gap:var(--space-16);container-type:inline-size}.d-detail-layout{--detail-rail-width:calc(var(--space-128) + var(--space-128) + var(--space-128));display:grid;grid-template-columns:var(--detail-rail-width) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:var(--space-16);height:100%;min-height:0;transition:none}.d-detail-layout[data-detail-rail-size="320"]{--detail-rail-width:calc(var(--space-128) + var(--space-128) + var(--space-64))}.d-detail-layout[data-detail-rail-size="448"]{--detail-rail-width:calc(var(--space-128) + var(--space-128) + var(--space-128) + var(--space-64))}.d-detail-layout.is-detail-closed{grid-template-columns:minmax(0,1fr) minmax(0,0fr);gap:0}.d-detail-layout .panel{min-width:0;padding:var(--space-16)}.d-detail-collection{display:grid;align-content:start;gap:var(--space-8);min-height:0;overflow-y:auto;overscroll-behavior:contain}.d-detail-collection nav{display:block}.d-detail-main{display:grid;align-self:start;align-content:start;gap:var(--space-20);box-sizing:border-box;overflow:hidden;opacity:1;transform:translateX(0);transition:opacity var(--motion-fast) var(--motion-ease),transform var(--motion-fast) var(--motion-ease)}.d-detail-main>.section-header{margin:0}.d-detail-layout.is-detail-closed [data-detail-main]{opacity:0;transform:translateX(var(--space-8));pointer-events:none}.d-detail-main [data-detail-content]{display:grid;gap:var(--space-12)}.d-detail-main p{margin:0;color:var(--text-secondary)}.d-detail-main.is-changing{animation:d-detail-enter var(--motion-fast) var(--motion-ease)}
+.d-detail-layout.is-detail-resizing{transition:grid-template-columns var(--motion-standard) var(--motion-ease),gap var(--motion-standard) var(--motion-ease)}.d-detail-layout:is(.is-detail-opening,.is-detail-closing) [data-detail-main]{opacity:0;transform:translateX(var(--space-8));pointer-events:none}
+@keyframes d-detail-enter{from{opacity:0;transform:translateX(var(--space-8))}to{opacity:1;transform:translateX(0)}}
+.d-detail-main [data-detail-content]>h2{margin:0}
+.selectable-row-title{min-width:0;overflow-wrap:anywhere;font-weight:500}.selectable-row-meta{min-width:0;color:var(--text-secondary);font-size:var(--fs-control);line-height:1.5;overflow-wrap:anywhere}.selectable-row-trailing{display:flex;align-items:center;gap:var(--space-8);color:var(--text-tertiary);font-size:var(--fs-meta);font-variant-numeric:tabular-nums}.selectable-row-trailing svg{width:var(--icon-sm);height:var(--icon-sm);flex:none;stroke-width:var(--icon-stroke-sm)}
+.selectable-row[aria-current=true] .selectable-row-title{font-weight:600}
+.selectable-row.is-activity-event .selectable-row-title{font-size:var(--fs-body)}.selectable-row.is-activity-event .selectable-row-meta{font-size:var(--fs-control)}.selectable-row.is-activity-event .selectable-row-status{font-weight:500}.selectable-row.is-activity-event .selectable-row-status[data-tone=danger]{color:var(--danger)}.selectable-row.is-activity-event .selectable-row-summary{color:var(--text-secondary);font-size:var(--fs-control);line-height:1.5;overflow-wrap:anywhere}
+.selectable-list{display:grid;list-style:none;margin:0;padding:0;overflow:hidden}.panel.selectable-list{padding:0}.selectable-list>li+li{border-top:1px solid var(--border-soft)}.selectable-list .selectable-row{border:0;border-radius:0}.selectable-list .selectable-row:focus-visible,.selectable-list .selectable-row.is-focus{outline-offset:calc(var(--focus-offset) * -1);border-radius:0}
+.d-drawer-demo{display:flex;align-items:center;justify-content:flex-start;min-height:calc(var(--space-128) + var(--space-96));padding:var(--space-16);background:var(--bg);border-radius:var(--dui-radius-control)}.d-drawer{position:fixed;inset:0 0 0 auto;display:none;grid-template-rows:auto minmax(0,1fr) auto;gap:var(--space-20);box-sizing:border-box;width:min(100vw,calc(var(--space-128) + var(--space-128) + var(--space-128)));height:100dvh;max-height:100dvh;margin:0;padding:var(--space-24);overflow:auto;border:0;border-left:1px solid var(--border);background:var(--surface);color:var(--text);box-shadow:var(--shadow-dialog);transform:translateX(100%);opacity:0;transition:transform var(--motion-standard) var(--motion-ease),opacity var(--motion-fast) var(--motion-ease)}.d-drawer[open]{display:grid;transform:translateX(0);opacity:1}.d-drawer::backdrop{background:var(--scrim);opacity:0;transition:opacity var(--motion-fast) var(--motion-ease)}.d-drawer[open]::backdrop{opacity:1}.d-drawer-content{display:grid;align-content:start;gap:var(--space-16);min-width:0}.d-drawer-actions{display:flex;justify-content:flex-end;gap:var(--space-8)}.d-drawer h3{margin:0;font-size:var(--fs-section)}
+.d-detail-layout.is-detail-expanded{grid-template-columns:minmax(0,0fr) minmax(0,1fr);gap:0}.d-detail-layout.is-detail-expanded .d-detail-collection{min-width:0;overflow:hidden;opacity:0;pointer-events:none;padding:0;border-width:0}
+.d-detail-layout.is-detail-closed.is-detail-expanded{grid-template-columns:minmax(0,1fr) minmax(0,0fr);gap:0}.d-detail-layout.is-detail-closed.is-detail-expanded .d-detail-collection{overflow:visible;opacity:1;pointer-events:auto;padding:var(--space-16);border-width:1px}
+.d-detail-expand-close{display:none}.d-detail-expand-open,.d-detail-expand-close{align-items:center}.d-detail-expand-close svg,.d-detail-expand-open svg{width:var(--icon-md);height:var(--icon-md)}[data-detail-expand][aria-pressed=true] .d-detail-expand-open{display:none}[data-detail-expand][aria-pressed=true] .d-detail-expand-close{display:inline-flex}
+.d-drawer[open]{transition-behavior:allow-discrete}.d-drawer.is-closing{transform:translateX(100%);opacity:0}.d-drawer.is-closing::backdrop{opacity:0}@starting-style{.d-drawer[open]:not(.is-closing){transform:translateX(100%);opacity:0}.d-drawer[open]::backdrop{opacity:0}}
+.selectable-row-activity-sample{display:grid;gap:var(--space-8);margin-top:var(--space-16)}
+.d-detail-collection{transition:opacity var(--motion-fast) var(--motion-ease),padding var(--motion-standard) var(--motion-ease),border-width var(--motion-standard) var(--motion-ease)}
+@media(prefers-reduced-motion:reduce){.d-drawer,.d-drawer::backdrop{transition:none}}
+.d-transparent-surface-demo{display:grid;gap:var(--space-12)}.d-transparent-stage{display:grid;gap:var(--space-12);padding:var(--space-16);border-radius:var(--dui-radius-control);background:linear-gradient(120deg,var(--accent) 0 28%,var(--surface-3) 28% 62%,var(--warning) 62% 100%)}.d-transparent-sample{display:grid;gap:var(--space-4);padding:var(--space-12);border:1px solid var(--border);border-radius:var(--dui-radius-control);color:var(--text)}.d-transparent-sample code{color:var(--text-secondary);font:400 var(--fs-meta)/1.4 var(--font-mono)}.d-transparent-sample span{color:var(--text-secondary);font:400 var(--fs-meta)/1.4 var(--font-sans)}.d-transparent-glass{background:color-mix(in srgb,var(--surface) 30%,transparent);backdrop-filter:blur(10px)}.d-transparent-media{background:color-mix(in srgb,var(--surface) 88%,transparent)}@media(min-width:650px){.d-transparent-stage{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media(prefers-reduced-motion:reduce){.selectable-row,.selectable-row-icon,.d-detail-layout,.d-detail-main{transition:none}.d-detail-main.is-changing{animation:none}}
+@container (max-width:655px){.d-detail-layout:not(.is-detail-closed):not(.is-detail-expanded)[data-detail-rail-size="320"]{grid-template-columns:minmax(0,1fr)}}@container (max-width:719px){.d-detail-layout:not(.is-detail-closed):not(.is-detail-expanded)[data-detail-rail-size="384"]{grid-template-columns:minmax(0,1fr)}}@container (max-width:783px){.d-detail-layout:not(.is-detail-closed):not(.is-detail-expanded)[data-detail-rail-size="448"]{grid-template-columns:minmax(0,1fr)}}
+
+/* In stacked layouts, return to document scrolling instead of nesting scroll regions. */
+@container (max-width:655px){.d-detail-layout[data-detail-rail-size="320"]{height:auto;grid-template-rows:auto;min-height:0;align-self:start}.d-detail-layout[data-detail-rail-size="320"] .d-detail-collection{max-block-size:none;overflow:visible;overscroll-behavior:auto}}
+@container (max-width:719px){.d-detail-layout[data-detail-rail-size="384"]{height:auto;grid-template-rows:auto;min-height:0;align-self:start}.d-detail-layout[data-detail-rail-size="384"] .d-detail-collection{max-block-size:none;overflow:visible;overscroll-behavior:auto}}
+@container (max-width:783px){.d-detail-layout[data-detail-rail-size="448"]{height:auto;grid-template-rows:auto;min-height:0;align-self:start}.d-detail-layout[data-detail-rail-size="448"] .d-detail-collection{max-block-size:none;overflow:visible;overscroll-behavior:auto}}
+
+/* Documentation specimens use the production components without inventing a visual variant. */
+.chat-demo{display:grid;gap:var(--space-12);width:100%;max-width:var(--dui-measure)}.panel.chat-demo{padding:var(--space-16)}
