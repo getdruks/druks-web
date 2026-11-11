@@ -135,7 +135,7 @@ html { scroll-padding-top: var(--nav-h, 0px); scroll-behavior: smooth; }
 .lede { font-size: clamp(16px, 2.2vh, 18.5px); line-height: 1.5; color: var(--text-secondary); max-width: 31em; margin: 0 0 clamp(16px, 3vh, 30px); }
 .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
 .hero-actions { display: grid; justify-items: start; gap: var(--space-16); min-width: 0; }
-.install-cue { display: inline-flex; align-items: center; gap: var(--space-4); color: var(--text-tertiary); font: 400 var(--fs-meta)/1.4 var(--font-sans); }
+.install-cue { display: inline-flex; margin: 0; align-items: center; gap: var(--space-4); color: var(--text-tertiary); font: 400 var(--fs-meta)/1.4 var(--font-sans); }
 a.install-cue { text-decoration: none; }
 a.install-cue:hover, a.install-cue:focus-visible { color: var(--text-secondary); }
 .compare-card > .install-panel { grid-column: 1 / -1; grid-row: 3; margin-top: var(--space-8); }
@@ -288,7 +288,7 @@ table.work .mono { font: 12.5px var(--font-page-mono); color: var(--text-seconda
 .compare-illustration { display:block; width:min(100%,140px); height:auto; max-height:132px; overflow:visible; }
 .compare-illustration :is(path,rect,line,circle,polyline) { fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
 .compare-illustration .illustration-accent { color:var(--accent); stroke:currentColor; }
-.compare-card:last-child > .button { width:max-content; justify-self:end; }
+.compare-card > .button.primary { width:max-content; justify-self:end; }
 .compare-list { display: grid; gap: var(--space-16); margin: 0; }
 .compare-card > .compare-list { grid-column:1 / -1; grid-row:2; margin-top: var(--space-16); }
 .compare-item { display: grid; gap: var(--space-4); }
