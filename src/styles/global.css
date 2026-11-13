@@ -135,12 +135,12 @@ html { scroll-padding-top: var(--nav-h, 0px); scroll-behavior: smooth; }
 .lede { font-size: clamp(16px, 2.2vh, 18.5px); line-height: 1.5; color: var(--text-secondary); max-width: 31em; margin: 0 0 clamp(16px, 3vh, 30px); }
 .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
 .hero-actions { display: grid; justify-items: start; gap: var(--space-16); min-width: 0; }
-.install-cue { display: inline-flex; align-items: center; gap: var(--space-4); color: var(--text-tertiary); font: 400 var(--fs-meta)/1.4 var(--font-sans); }
+.install-cue { display: inline-flex; margin: 0; align-items: center; gap: var(--space-4); color: var(--text-tertiary); font: 400 var(--fs-meta)/1.4 var(--font-sans); }
 a.install-cue { text-decoration: none; }
 a.install-cue:hover, a.install-cue:focus-visible { color: var(--text-secondary); }
 .compare-card > .install-panel { grid-column: 1 / -1; grid-row: 3; margin-top: var(--space-8); }
 .install-cue svg { width: var(--icon-sm); height: var(--icon-sm); flex: none; stroke: currentColor; stroke-width: var(--icon-stroke-sm); fill: none; }
-.field.install-value-field:has(textarea[readonly]) { align-items: flex-start; --input: var(--surface); --surface-2: var(--surface); min-width: 0; width: 100%; padding-left: 0; padding-right: 0; border: 0; background: var(--surface); }
+.field.install-value-field:has(textarea[readonly]) { align-items: flex-start; --input: var(--surface); --surface-2: var(--surface); min-width: 0; width: 100%; padding-left: 0; padding-right: 0; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--surface); }
 .install-label { margin: var(--space-12) 0 var(--space-4); color: var(--text-tertiary); font-size: var(--fs-meta); }
 .install-label:first-child { margin-top: 0; }
 .install-value-field textarea { padding-inline: var(--space-12); align-self: flex-start; min-width: 0; min-height: 0; overflow: hidden; resize: none; padding-block: 9px; font-size: 14px; line-height: 1.45; cursor: text; }
@@ -223,6 +223,10 @@ a.install-cue:hover, a.install-cue:focus-visible { color: var(--text-secondary);
 .sec#faq > .wrap.faq { display: grid; flex: 1; grid-template-rows: auto auto auto; align-content: center; }
 .section-next { display: inline-flex; align-items: center; justify-content: center; align-self: center; gap: var(--space-4); margin-top: auto; padding-block: var(--space-16) 0; color: var(--text-secondary); font: 400 var(--fs-meta)/1.2 var(--font-sans); opacity: .85; text-decoration: none; transition: color 180ms ease-in-out, opacity 180ms ease-in-out; }
 .section-next:hover, .section-next:focus-visible { color: var(--text-secondary); opacity: 1; }
+.section-cta { align-self: center; justify-self: center; margin-top: auto; }
+.faq > .section-cta { margin-top: var(--space-16); }
+.phone-only { display: none; }
+@media (max-width: 640px) and (pointer: coarse) { .phone-only { display: inline-flex; } }
 .section-next svg { display: block; width: var(--icon-sm); height: var(--icon-sm); fill: none; stroke: currentColor; stroke-width: var(--icon-stroke-sm); stroke-linecap: round; stroke-linejoin: round; }
 .sec h2 { font-weight: 600; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0 16px; }
 .sec .intro { width: 100%; max-width: none; font-size: 17px; color: var(--text-secondary); margin: 0 0 44px; }
@@ -288,7 +292,9 @@ table.work .mono { font: 12.5px var(--font-page-mono); color: var(--text-seconda
 .compare-illustration { display:block; width:min(100%,140px); height:auto; max-height:132px; overflow:visible; }
 .compare-illustration :is(path,rect,line,circle,polyline) { fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
 .compare-illustration .illustration-accent { color:var(--accent); stroke:currentColor; }
-.compare-card:last-child > .button { width:max-content; justify-self:end; }
+.compare-card > .button.primary { width:max-content; justify-self:end; }
+.compare-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.compare-tag { justify-self: start; margin-bottom: var(--space-4); }
 .compare-list { display: grid; gap: var(--space-16); margin: 0; }
 .compare-card > .compare-list { grid-column:1 / -1; grid-row:2; margin-top: var(--space-16); }
 .compare-item { display: grid; gap: var(--space-4); }
@@ -403,6 +409,8 @@ table.work .mono { font: 12.5px var(--font-page-mono); color: var(--text-seconda
 @media (prefers-reduced-motion: reduce) { .log li.new { animation: none; } }
 /* phones: the logo, Try it now and the menu button stay on one row */
 @media (max-width: 400px) { .site-nav { column-gap: var(--space-8); } }
+/* phones: no cloud icon in the nav, so the longer "Try Druks Cloud" keeps the logo and button on one row */
+@media (max-width: 640px) { .nav-actions .cloud-icon { display: none; } .nav-actions .button.primary { padding-inline: var(--space-12); } }
 /* phones: Try it now and the install link on one row, a shorter hero so the demo starts on the first screen */
 @media (max-width: 640px) {
   .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8) var(--space-16); }
