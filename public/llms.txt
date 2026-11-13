@@ -1,0 +1,32 @@
+# Druks
+
+> AI agents work. You make the call. Druks runs Claude Code and Codex on your recurring engineering work, self-hosted or in the cloud, and asks a person before anything changes.
+
+Druks is a platform where AI agents do a company's recurring engineering work, and a person approves each change.
+
+- It finds the work. A schedule, an alert or a button starts a run. Nobody writes a prompt.
+- It does the work with your tools: Claude Code or Codex, with your own Claude or OpenAI account, in a sandbox, on your real repositories. You see the cost after every step.
+- You make the call. The run stops and asks: Approve, Change or Stop. You answer in Slack, the dashboard, the Druks chat or Claude Code.
+
+The security sweep is the first app. Every week it reads a repository's open Dependabot alerts, checks which ones touch code you call, upgrades the packages in a sandbox, runs your tests, and opens a pull request only after you approve.
+
+Druks is source available under the Functional Source License (FSL-1.1-ALv2). You can self-host it, change it and build apps on it. Each release becomes Apache 2.0 two years after it ships.
+
+## Get started
+
+- [Try Druks Cloud](https://app.druks.ai/sign-in?utm_source=llms.txt): We run Druks for you. You connect your repositories and approve.
+- [Quickstart](https://docs.druks.ai/quickstart): From nothing to your first approval, on Druks Cloud or on your own machine.
+- [Connect your agent](https://docs.druks.ai/connect-your-agent): Connect Claude Code or Codex to the Druks MCP endpoint.
+
+## Docs
+
+- [Documentation index for LLMs](https://docs.druks.ai/llms.txt): Every docs page, with a one-line summary.
+- [Full documentation for LLMs](https://docs.druks.ai/llms-full.txt): All docs pages as one text file.
+- [Approvals](https://docs.druks.ai/approvals): How a run waits for your yes, and where you give it.
+- [Licensing](https://docs.druks.ai/licensing): What the Functional Source License lets you do with Druks.
+
+## Optional
+
+- [Source code](https://github.com/czpython/druks): The Druks repository on GitHub.
+- [Security policy](https://github.com/czpython/druks/blob/main/SECURITY.md): How to report a vulnerability in Druks.
+- [Blog](https://druks.ai/blog)
