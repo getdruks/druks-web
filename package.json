@@ -7,8 +7,7 @@
     "dev": "astro dev",
     "build": "node scripts/check-tokens.mjs && astro build",
     "postbuild": "find dist -name .DS_Store -delete",
-    "preview": "astro preview",
-    "deploy": "npm run build && rsync -az --delete dist/ druks-prod-control:/home/druks-app/site/ && ssh druks-prod-control chown -R druks-app:druks-app /home/druks-app/site"
+    "preview": "astro preview"
   },
   "devDependencies": {
     "astro": "7.2.9"
