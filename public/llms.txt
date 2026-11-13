@@ -8,7 +8,11 @@ Druks is a platform where AI agents do a company's recurring engineering work, a
 - It does the work with your tools: Claude Code or Codex, with your own Claude or OpenAI account, in a sandbox, on your real repositories. You see the cost after every step.
 - You make the call. The run stops and asks: Approve, Change or Stop. You answer in Slack, the dashboard, the Druks chat or Claude Code.
 
-The security sweep is the first app. Every week it reads a repository's open Dependabot alerts, checks which ones touch code you call, upgrades the packages in a sandbox, runs your tests, and opens a pull request only after you approve.
+Each process is an app with its own schedule or trigger. Druks comes with these apps:
+
+- Security sweep: fixes vulnerabilities and hardens your build. Every Monday it reads a repository's open Dependabot alerts, checks which ones touch code you call, upgrades the packages in a sandbox and runs your tests. It also checks your GitHub Actions and git history. It opens a pull request only after you approve.
+- Ticket to pull request: takes a ticket, for example one labeled "druks", writes and checks the change, and opens a pull request for review.
+- Your own process: a Druks app is a Python package. You choose what starts it, what the agent does, and where it asks a person.
 
 Druks is source available under the Functional Source License (FSL-1.1-ALv2). You can self-host it, change it and build apps on it. Each release becomes Apache 2.0 two years after it ships.
 
@@ -23,6 +27,7 @@ Druks is source available under the Functional Source License (FSL-1.1-ALv2). Yo
 - [Documentation index for LLMs](https://docs.druks.ai/llms.txt): Every docs page, with a one-line summary.
 - [Full documentation for LLMs](https://docs.druks.ai/llms-full.txt): All docs pages as one text file.
 - [Approvals](https://docs.druks.ai/approvals): How a run waits for your yes, and where you give it.
+- [Writing an app](https://docs.druks.ai/writing-an-app): Build your own Druks app with workflows, agents and approvals.
 - [Licensing](https://docs.druks.ai/licensing): What the Functional Source License lets you do with Druks.
 
 ## Optional
