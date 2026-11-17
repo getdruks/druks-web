@@ -226,6 +226,7 @@ a.install-cue:hover, a.install-cue:focus-visible { color: var(--text-secondary);
 .section-cta { align-self: center; justify-self: center; margin-top: auto; }
 .faq > .section-cta { margin-top: var(--space-16); }
 .phone-only { display: none; }
+@media (max-width: 640px) { .star-btn { display: none; } }
 @media (max-width: 640px) and (pointer: coarse) { .phone-only { display: inline-flex; } }
 .section-next svg { display: block; width: var(--icon-sm); height: var(--icon-sm); fill: none; stroke: currentColor; stroke-width: var(--icon-stroke-sm); stroke-linecap: round; stroke-linejoin: round; }
 .sec h2 { font-weight: 600; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0 16px; }
