@@ -32,6 +32,6 @@ Druks is source available under the Functional Source License (FSL-1.1-ALv2). Yo
 
 ## Optional
 
-- [Source code](https://github.com/czpython/druks): The Druks repository on GitHub.
-- [Security policy](https://github.com/czpython/druks/blob/main/SECURITY.md): How to report a vulnerability in Druks.
+- [Source code](https://github.com/getdruks/druks): The Druks repository on GitHub.
+- [Security policy](https://github.com/getdruks/druks/blob/main/SECURITY.md): How to report a vulnerability in Druks.
 - [Blog](https://druks.ai/blog)
